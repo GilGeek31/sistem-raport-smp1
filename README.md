@@ -1,3 +1,12 @@
+================================================================
+
+1. npx create-next-app@latest sistem-raport-smp
+2. TypeScript = Yes, ESLint = Yes, Tailwind CSS = Yes, App Router = Yes, src/ directory = yes.
+3. npm install prisma @prisma/client next-auth zod bcryptjs
+4. npm install -D @types/bcryptjs
+
+==================================================================
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
