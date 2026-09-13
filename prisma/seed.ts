@@ -7,7 +7,7 @@ const prisma = new PrismaClient({ adapter });
 
 
 async function main() {
-  const password = await bcrypt.hash('password123', 10);
+  const password = await bcrypt.hash('`password123`', 10);
 
   // ===== TAHUN AJARAN =====
   const tahunAjaran = await prisma.tahunAjaran.create({
