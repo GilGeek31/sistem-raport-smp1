@@ -6,7 +6,16 @@
 4. npm install -D @types/bcryptjs
 
 ==================================================================
+Progres projek
 
+1. Setup Next.js dengan struktur src/ directory
+
+- Skema Prisma untuk 18 tabel + seed data dummy
+- Autentikasi multi-identifier (email/NIP/NISN) dengan Auth.js v5
+- Halaman login dan dashboard sederhana
+- Endpoint CRUD /api/v1/mapels sebagai pola untuk endpoint lainnya
+
+==================================================================
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
