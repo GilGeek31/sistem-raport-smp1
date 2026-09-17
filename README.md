@@ -6,49 +6,120 @@
 4. npm install -D @types/bcryptjs
 
 ==================================================================
-Progres projek
 
-1. Setup Next.js dengan struktur src/ directory
+# Progres Proyek — Sistem Pengelolaan Nilai Raport SMP
 
-- Skema Prisma untuk 18 tabel + seed data dummy
-- Autentikasi multi-identifier (email/NIP/NISN) dengan Auth.js v5
-- Halaman login dan dashboard sederhana
-- Endpoint CRUD /api/v1/mapels sebagai pola untuk endpoint lainnya
+Terakhir diperbarui berdasarkan progres pengembangan sejauh ini.
 
-==================================================================
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Stack & Arsitektur
 
-## Getting Started
+| Bagian           | Teknologi                                                                |
+| ---------------- | ------------------------------------------------------------------------ |
+| Framework        | Next.js 16.3.4 (App Router, struktur `src/`)                             |
+| Database         | MySQL                                                                    |
+| ORM              | Prisma 7 (dengan driver adapter `@prisma/adapter-mariadb`)               |
+| Autentikasi      | Auth.js v5 (Credentials Provider, JWT, multi-identifier: email/NIP/NISN) |
+| Validasi         | Zod                                                                      |
+| Hashing password | bcryptjs                                                                 |
+| Generate PDF     | Puppeteer                                                                |
+| Proteksi halaman | `proxy.ts` (fitur Next.js 16, pengganti `middleware.ts`)                 |
 
-First, run the development server:
+## Struktur File Penting
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+src/
+├── app/
+│   ├── layout.tsx              — root layout, dibungkus <Providers>
+│   ├── providers.tsx           — SessionProvider wrapper
+│   ├── login/page.tsx          — halaman login
+│   ├── dashboard/page.tsx      — halaman dashboard (contoh baca session)
+│   └── api/
+│       ├── auth/[...nextauth]/route.ts
+│       └── v1/
+│           ├── mapels/
+│           ├── siswas/
+│           ├── gurus/
+│           ├── tahun-ajarans/
+│           ├── kelas/
+│           ├── ekskuls/
+│           ├── kokurikulers/
+│           ├── guru-mapels/
+│           ├── tujuan-pembelajaran/
+│           ├── nilai/
+│           ├── nilai-ekskuls/
+│           ├── nilai-kokurikulers/
+│           ├── kehadiran/
+│           ├── tanda-tangan/
+│           ├── pengaturan-raport/
+│           └── raport/[siswaId]/{preview,pdf}/
+├── lib/
+│   ├── prisma.ts
+│   ├── auth.config.ts          — config ringan (tanpa Prisma), dipakai proxy.ts
+│   ├── auth.ts                 — config lengkap (dengan Prisma), dipakai di server
+│   ├── api-response.ts         — helper format response konsisten
+│   ├── nilai-helpers.ts        — helper generate deskripsi otomatis & cek kepemilikan
+│   └── raport-data.ts / raport-template.ts — pengumpul data & template HTML raport
+├── proxy.ts                    — proteksi halaman (di root src/)
+prisma/
+├── schema.prisma                — 18 tabel + enum Role, StatusTP, KategoriMapel
+└── seed.ts                      — data dummy testing
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✅ Sudah Selesai
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Fondasi**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [x] Setup Next.js + Prisma + MySQL
+- [x] Skema database 18 tabel, migrasi berhasil
+- [x] Seed data dummy (admin, guru, siswa, kelas, mapel dasar)
+- [x] Autentikasi multi-identifier (email/NIP/NISN) + proteksi halaman berbasis role
 
-## Learn More
+**Endpoint API — Master Data**
 
-To learn more about Next.js, take a look at the following resources:
+- [x] `mapels` (CRUD)
+- [x] `siswas` (CRUD, auto-create akun)
+- [x] `gurus` (CRUD, auto-create akun, pilih role: guru mapel/wali kelas/koordinator)
+- [x] `tahun-ajarans` (CRUD + endpoint aktivasi khusus)
+- [x] `kelas` (CRUD)
+- [x] `ekskuls`, `kokurikulers` (CRUD)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Endpoint API — Akademik**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [x] `guru-mapels` (penugasan mengajar + endpoint `/saya`)
+- [x] `tujuan-pembelajaran` (CRUD, input banyak sekaligus, dengan pengecekan kepemilikan guru)
+- [x] `nilai` — input massal (`/bulk`), tabel per kelas, edit manual, finalisasi (`isFinal`)
 
-## Deploy on Vercel
+**Endpoint API — Pendukung Raport**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] `nilai-ekskuls` (dengan filter per kelas untuk wali kelas)
+- [x] `nilai-kokurikulers`
+- [x] `kehadiran` (lihat + update per siswa)
+- [x] `tanda-tangan` (khusus wali kelas & kepala sekolah)
+- [x] `pengaturan-raport` (tanggal & tempat, per tahun ajaran)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Cetak Raport**
+
+- [x] `raport/:siswaId/preview` — data JSON lengkap
+- [x] `raport/:siswaId/pdf` — generate PDF via Puppeteer
+
+## 🔲 Belum Dikerjakan
+
+- [ ] **Monitoring & Laporan** — progress input nilai per kelas, leger nilai, grafik perkembangan siswa lintas semester
+- [ ] **Upload file sungguhan** — endpoint TTD & foto profil masih menerima teks (URL/path), belum ada endpoint upload file (`multipart/form-data`) yang sesungguhnya
+- [ ] **Integrasi storage produksi** — keputusan Cloudflare R2/MinIO sempat dibahas di awal, belum diimplementasikan (masih asumsi lokal)
+- [ ] **Endpoint unfinalize nilai** — nilai yang sudah `isFinal: true` belum ada cara "buka kunci" lagi (perlu endpoint khusus Admin kalau dibutuhkan)
+- [ ] **JWT terpisah untuk mobile** (`/auth/mobile-login`, `/auth/refresh`) — didesain di awal, belum dibuat karena belum ada kebutuhan mobile app
+- [ ] **Frontend/UI** — sejauh ini baru ada halaman `login` dan `dashboard` (versi debug sederhana). Semua fitur lain baru berupa API, belum ada tampilan penggunanya
+
+## Catatan Teknis Penting
+
+- **`lib/auth.config.ts` vs `lib/auth.ts`** — dipisah supaya `proxy.ts` tidak ikut membawa Prisma ke dalam bundle-nya (isu kompatibilitas Prisma 7 + `proxy.ts`)
+- **Pola "kepemilikan"** (guru cuma boleh akses mapel/kelas yang dia ampu) dicek manual lewat helper function di tiap endpoint terkait — ini pengganti "Policy class" dari rencana awal berbasis Laravel
+- **Nilai semester lalu (readonly)** di endpoint `GET /nilai` pakai pendekatan yang disederhanakan (cari tahun ajaran sebelumnya berdasarkan urutan `tahun`+`semester`) — mungkin perlu disempurnakan kalau ada kasus siswa pindah kelas antar semester
+- **Password default** untuk siswa/guru baru: NISN/NIP masing-masing (kalau admin tidak isi manual)
+
+## Rekomendasi Langkah Selanjutnya
+
+1. Selesaikan endpoint **monitoring & leger** (sisa terakhir dari daftar API awal)
+2. Mulai bangun **frontend** untuk fitur-fitur yang API-nya sudah siap — halaman input nilai massal kemungkinan paling prioritas karena itu jantung aplikasi
+3. Pertimbangkan **upload file** (TTD, foto profil) kalau sudah waktunya

@@ -30,14 +30,16 @@ export function generateRaportHtml(data: DataRaport): string {
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<title>Raport ${siswa.nama}</title>
 <meta charset="UTF-8" />
 <style>
-  body { font-family: 'Times New Roman', serif; font-size: 12px; color: #111; margin: 0; padding: 32px; }
+  body { font-family: 'Times New Roman', serif; font-size: 12px; color: #111; margin: 0; padding: 15px; }
   h1 { text-align: center; font-size: 16px; margin-bottom: 4px; }
   .subtitle { text-align: center; font-size: 12px; margin-bottom: 24px; }
   table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
-  th, td { border: 1px solid #333; padding: 6px 8px; text-align: left; vertical-align: top; }
-  th { background: #f0f0f0; }
+  th, td { border: 1px solid #333; padding: 6px 8px; vertical-align: top; }
+  th { background: #f0f0f0; text-align: center }
+  .center{text-align:center;}
   .info-table td { border: none; padding: 2px 4px; }
   .ttd-section { display: flex; justify-content: space-between; margin-top: 40px; }
   .ttd-box { text-align: center; width: 200px; }
@@ -66,7 +68,7 @@ export function generateRaportHtml(data: DataRaport): string {
         <tr>
           <td>${i + 1}</td>
           <td>${n.mapel}</td>
-          <td>${n.nilaiAkhir ?? '-'}</td>
+          <td class="center">${n.nilaiAkhir ?? '-'}</td>
           <td>${n.deskripsi ?? '-'}</td>
         </tr>`
         )
@@ -88,7 +90,7 @@ export function generateRaportHtml(data: DataRaport): string {
         <tr>
           <td>${i + 1}</td>
           <td>${e.nama}</td>
-          <td>${e.nilai ?? '-'}</td>
+          <td class="center">${e.nilai ?? '-'}</td>
           <td>${e.deskripsi ?? '-'}</td>
         </tr>`
               )
@@ -116,9 +118,9 @@ export function generateRaportHtml(data: DataRaport): string {
   </table>
 
   <div class="section-title">D. Ketidakhadiran</div>
-  <table style="width: 60%">
+  <table style="width: 40%" class="tb-sakit">
     <tr><th>Sakit</th><th>Izin</th><th>Tanpa Keterangan</th></tr>
-    <tr><td>${kehadiran.sakit} hari</td><td>${kehadiran.izin} hari</td><td>${kehadiran.tanpaKeterangan} hari</td></tr>
+    <tr><td class="center">${kehadiran.sakit} hari</td><td  class="center">${kehadiran.izin} hari</td><td class="center">${kehadiran.tanpaKeterangan} hari</td></tr>
   </table>
 
   <div class="ttd-section">
