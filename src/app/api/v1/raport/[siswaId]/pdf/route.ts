@@ -42,7 +42,7 @@ export async function GET(
 
     // 3. "Muat" HTML yang kita generate tadi ke tab itu,
     //    seolah-olah kita buka file HTML biasa di Chrome
-    await page.setContent(html, { waitUntil: 'networkidle0' });
+    await page.setContent(html, { waitUntil: 'load' });
 
     // 4. "Screenshot" seluruh halaman itu, dalam bentuk PDF
     const pdfBuffer = await page.pdf({
@@ -51,8 +51,10 @@ export async function GET(
       margin: { top: '20mm', bottom: '20mm', left: '20mm', right: '20mm' },
     });
 
-    // 5. Kirim hasilnya sebagai file PDF ke browser yang minta
-    return new NextResponse(pdfBuffer, {
+    // 5. Kirim hasilnya sebagai file PDF ke browser yang minta.
+    //    Dibungkus new Uint8Array(...) supaya tipenya cocok dengan
+    //    yang diharapkan NextResponse (isu tipe TypeScript, bukan bug logika).
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
