@@ -153,7 +153,28 @@ exports.Prisma.SiswaScalarFieldEnum = {
   nis: 'nis',
   nama: 'nama',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  tempatLahir: 'tempatLahir',
+  tanggalLahir: 'tanggalLahir',
+  agama: 'agama',
+  nik: 'nik',
+  statusDalamKeluarga: 'statusDalamKeluarga',
+  anakKe: 'anakKe',
+  alamatSiswa: 'alamatSiswa',
+  noTeleponRumah: 'noTeleponRumah',
+  sekolahAsal: 'sekolahAsal',
+  diterimaKelas: 'diterimaKelas',
+  diterimaTanggal: 'diterimaTanggal',
+  namaAyah: 'namaAyah',
+  namaIbu: 'namaIbu',
+  alamatOrtu: 'alamatOrtu',
+  noHpOrtu: 'noHpOrtu',
+  pekerjaanAyah: 'pekerjaanAyah',
+  pekerjaanIbu: 'pekerjaanIbu',
+  namaWali: 'namaWali',
+  alamatWali: 'alamatWali',
+  noHpWali: 'noHpWali',
+  pekerjaanWali: 'pekerjaanWali'
 };
 
 exports.Prisma.MapelScalarFieldEnum = {
@@ -320,7 +341,23 @@ exports.Prisma.GuruOrderByRelevanceFieldEnum = {
 exports.Prisma.SiswaOrderByRelevanceFieldEnum = {
   nisn: 'nisn',
   nis: 'nis',
-  nama: 'nama'
+  nama: 'nama',
+  tempatLahir: 'tempatLahir',
+  nik: 'nik',
+  alamatSiswa: 'alamatSiswa',
+  noTeleponRumah: 'noTeleponRumah',
+  sekolahAsal: 'sekolahAsal',
+  diterimaKelas: 'diterimaKelas',
+  namaAyah: 'namaAyah',
+  namaIbu: 'namaIbu',
+  alamatOrtu: 'alamatOrtu',
+  noHpOrtu: 'noHpOrtu',
+  pekerjaanAyah: 'pekerjaanAyah',
+  pekerjaanIbu: 'pekerjaanIbu',
+  namaWali: 'namaWali',
+  alamatWali: 'alamatWali',
+  noHpWali: 'noHpWali',
+  pekerjaanWali: 'pekerjaanWali'
 };
 
 exports.Prisma.MapelOrderByRelevanceFieldEnum = {
@@ -374,6 +411,22 @@ exports.Role = exports.$Enums.Role = {
   KEPALA_SEKOLAH: 'KEPALA_SEKOLAH',
   KOORDINATOR_KOKURIKULER: 'KOORDINATOR_KOKURIKULER',
   SISWA: 'SISWA'
+};
+
+exports.Agama = exports.$Enums.Agama = {
+  ISLAM: 'ISLAM',
+  KRISTEN: 'KRISTEN',
+  KATOLIK: 'KATOLIK',
+  HINDU: 'HINDU',
+  BUDDHA: 'BUDDHA',
+  KONGHUCU: 'KONGHUCU',
+  LAINNYA: 'LAINNYA'
+};
+
+exports.StatusDalamKeluarga = exports.$Enums.StatusDalamKeluarga = {
+  ANAK_KANDUNG: 'ANAK_KANDUNG',
+  ANAK_ANGKAT: 'ANAK_ANGKAT',
+  ANAK_TIRI: 'ANAK_TIRI'
 };
 
 exports.KategoriMapel = exports.$Enums.KategoriMapel = {

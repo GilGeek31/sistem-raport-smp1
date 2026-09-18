@@ -10,9 +10,38 @@ const createSiswaSchema = z.object({
   nisn: z.string().min(1, 'NISN wajib diisi'),
   nis: z.string().optional(),
   nama: z.string().min(1, 'Nama wajib diisi'),
-  // Kalau admin tidak isi password, kita pakai NISN sebagai password default
-  // (siswa disarankan ganti setelah login pertama kali).
   password: z.string().min(6).optional(),
+
+  // Data kelahiran & identitas
+  tempatLahir: z.string().optional(),
+  tanggalLahir: z.string().optional(), // format "YYYY-MM-DD", dikonversi ke Date di bawah
+  agama: z.enum(['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDDHA', 'KONGHUCU', 'LAINNYA']).optional(),
+  nik: z.string().optional(),
+  statusDalamKeluarga: z.enum(['ANAK_KANDUNG', 'ANAK_ANGKAT', 'ANAK_TIRI']).optional(),
+  anakKe: z.number().int().optional(),
+
+  // Alamat & kontak siswa
+  alamatSiswa: z.string().optional(),
+  noTeleponRumah: z.string().optional(),
+
+  // Riwayat penerimaan
+  sekolahAsal: z.string().optional(),
+  diterimaKelas: z.string().optional(),
+  diterimaTanggal: z.string().optional(),
+
+  // Data orang tua
+  namaAyah: z.string().optional(),
+  namaIbu: z.string().optional(),
+  alamatOrtu: z.string().optional(),
+  noHpOrtu: z.string().optional(),
+  pekerjaanAyah: z.string().optional(),
+  pekerjaanIbu: z.string().optional(),
+
+  // Data wali
+  namaWali: z.string().optional(),
+  alamatWali: z.string().optional(),
+  noHpWali: z.string().optional(),
+  pekerjaanWali: z.string().optional(),
 });
 
 // GET /api/v1/siswas?kelas_id=... — list siswa, bisa difilter per kelas
@@ -47,7 +76,11 @@ export async function POST(req: NextRequest) {
     return apiError(parsed.error.issues[0].message, 422);
   }
 
-  const { email, nisn, nis, nama, password } = parsed.data;
+  const {
+    email, nisn, nis, nama, password,
+    tanggalLahir, diterimaTanggal,
+    ...biodataLain
+  } = parsed.data;
 
   // Cek duplikat sebelum mulai transaction, supaya pesan errornya jelas
   const emailDipakai = await prisma.user.findUnique({ where: { email } });
@@ -55,6 +88,11 @@ export async function POST(req: NextRequest) {
 
   const nisnDipakai = await prisma.siswa.findUnique({ where: { nisn } });
   if (nisnDipakai) return apiError(`NISN "${nisn}" sudah digunakan`, 409);
+
+  if (biodataLain.nik) {
+    const nikDipakai = await prisma.siswa.findUnique({ where: { nik : biodataLain.nik } });
+    if (nikDipakai) return apiError(`NIK "${biodataLain.nik}" sudah digunakan`, 409);
+  }
 
   const hashedPassword = await bcrypt.hash(password ?? nisn, 10);
 
@@ -66,7 +104,15 @@ export async function POST(req: NextRequest) {
     });
 
     return tx.siswa.create({
-      data: { userId: user.id, nisn, nis, nama },
+      data: {
+        userId: user.id,
+        nisn,
+        nis,
+        nama,
+        ...biodataLain,
+        tanggalLahir: tanggalLahir ? new Date(tanggalLahir) : undefined,
+        diterimaTanggal: diterimaTanggal ? new Date(diterimaTanggal) : undefined,
+      },
     });
   });
 

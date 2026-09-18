@@ -136,6 +136,28 @@ export const KategoriMapel: {
 
 export type KategoriMapel = (typeof KategoriMapel)[keyof typeof KategoriMapel]
 
+
+export const Agama: {
+  ISLAM: 'ISLAM',
+  KRISTEN: 'KRISTEN',
+  KATOLIK: 'KATOLIK',
+  HINDU: 'HINDU',
+  BUDDHA: 'BUDDHA',
+  KONGHUCU: 'KONGHUCU',
+  LAINNYA: 'LAINNYA'
+};
+
+export type Agama = (typeof Agama)[keyof typeof Agama]
+
+
+export const StatusDalamKeluarga: {
+  ANAK_KANDUNG: 'ANAK_KANDUNG',
+  ANAK_ANGKAT: 'ANAK_ANGKAT',
+  ANAK_TIRI: 'ANAK_TIRI'
+};
+
+export type StatusDalamKeluarga = (typeof StatusDalamKeluarga)[keyof typeof StatusDalamKeluarga]
+
 }
 
 export type Role = $Enums.Role
@@ -149,6 +171,14 @@ export const StatusTP: typeof $Enums.StatusTP
 export type KategoriMapel = $Enums.KategoriMapel
 
 export const KategoriMapel: typeof $Enums.KategoriMapel
+
+export type Agama = $Enums.Agama
+
+export const Agama: typeof $Enums.Agama
+
+export type StatusDalamKeluarga = $Enums.StatusDalamKeluarga
+
+export const StatusDalamKeluarga: typeof $Enums.StatusDalamKeluarga
 
 /**
  * ##  Prisma Client ʲˢ
@@ -5011,11 +5041,13 @@ export namespace Prisma {
   export type SiswaAvgAggregateOutputType = {
     id: number | null
     userId: number | null
+    anakKe: number | null
   }
 
   export type SiswaSumAggregateOutputType = {
     id: number | null
     userId: number | null
+    anakKe: number | null
   }
 
   export type SiswaMinAggregateOutputType = {
@@ -5026,6 +5058,27 @@ export namespace Prisma {
     nama: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    tempatLahir: string | null
+    tanggalLahir: Date | null
+    agama: $Enums.Agama | null
+    nik: string | null
+    statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
+    anakKe: number | null
+    alamatSiswa: string | null
+    noTeleponRumah: string | null
+    sekolahAsal: string | null
+    diterimaKelas: string | null
+    diterimaTanggal: Date | null
+    namaAyah: string | null
+    namaIbu: string | null
+    alamatOrtu: string | null
+    noHpOrtu: string | null
+    pekerjaanAyah: string | null
+    pekerjaanIbu: string | null
+    namaWali: string | null
+    alamatWali: string | null
+    noHpWali: string | null
+    pekerjaanWali: string | null
   }
 
   export type SiswaMaxAggregateOutputType = {
@@ -5036,6 +5089,27 @@ export namespace Prisma {
     nama: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    tempatLahir: string | null
+    tanggalLahir: Date | null
+    agama: $Enums.Agama | null
+    nik: string | null
+    statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
+    anakKe: number | null
+    alamatSiswa: string | null
+    noTeleponRumah: string | null
+    sekolahAsal: string | null
+    diterimaKelas: string | null
+    diterimaTanggal: Date | null
+    namaAyah: string | null
+    namaIbu: string | null
+    alamatOrtu: string | null
+    noHpOrtu: string | null
+    pekerjaanAyah: string | null
+    pekerjaanIbu: string | null
+    namaWali: string | null
+    alamatWali: string | null
+    noHpWali: string | null
+    pekerjaanWali: string | null
   }
 
   export type SiswaCountAggregateOutputType = {
@@ -5046,6 +5120,27 @@ export namespace Prisma {
     nama: number
     createdAt: number
     updatedAt: number
+    tempatLahir: number
+    tanggalLahir: number
+    agama: number
+    nik: number
+    statusDalamKeluarga: number
+    anakKe: number
+    alamatSiswa: number
+    noTeleponRumah: number
+    sekolahAsal: number
+    diterimaKelas: number
+    diterimaTanggal: number
+    namaAyah: number
+    namaIbu: number
+    alamatOrtu: number
+    noHpOrtu: number
+    pekerjaanAyah: number
+    pekerjaanIbu: number
+    namaWali: number
+    alamatWali: number
+    noHpWali: number
+    pekerjaanWali: number
     _all: number
   }
 
@@ -5053,11 +5148,13 @@ export namespace Prisma {
   export type SiswaAvgAggregateInputType = {
     id?: true
     userId?: true
+    anakKe?: true
   }
 
   export type SiswaSumAggregateInputType = {
     id?: true
     userId?: true
+    anakKe?: true
   }
 
   export type SiswaMinAggregateInputType = {
@@ -5068,6 +5165,27 @@ export namespace Prisma {
     nama?: true
     createdAt?: true
     updatedAt?: true
+    tempatLahir?: true
+    tanggalLahir?: true
+    agama?: true
+    nik?: true
+    statusDalamKeluarga?: true
+    anakKe?: true
+    alamatSiswa?: true
+    noTeleponRumah?: true
+    sekolahAsal?: true
+    diterimaKelas?: true
+    diterimaTanggal?: true
+    namaAyah?: true
+    namaIbu?: true
+    alamatOrtu?: true
+    noHpOrtu?: true
+    pekerjaanAyah?: true
+    pekerjaanIbu?: true
+    namaWali?: true
+    alamatWali?: true
+    noHpWali?: true
+    pekerjaanWali?: true
   }
 
   export type SiswaMaxAggregateInputType = {
@@ -5078,6 +5196,27 @@ export namespace Prisma {
     nama?: true
     createdAt?: true
     updatedAt?: true
+    tempatLahir?: true
+    tanggalLahir?: true
+    agama?: true
+    nik?: true
+    statusDalamKeluarga?: true
+    anakKe?: true
+    alamatSiswa?: true
+    noTeleponRumah?: true
+    sekolahAsal?: true
+    diterimaKelas?: true
+    diterimaTanggal?: true
+    namaAyah?: true
+    namaIbu?: true
+    alamatOrtu?: true
+    noHpOrtu?: true
+    pekerjaanAyah?: true
+    pekerjaanIbu?: true
+    namaWali?: true
+    alamatWali?: true
+    noHpWali?: true
+    pekerjaanWali?: true
   }
 
   export type SiswaCountAggregateInputType = {
@@ -5088,6 +5227,27 @@ export namespace Prisma {
     nama?: true
     createdAt?: true
     updatedAt?: true
+    tempatLahir?: true
+    tanggalLahir?: true
+    agama?: true
+    nik?: true
+    statusDalamKeluarga?: true
+    anakKe?: true
+    alamatSiswa?: true
+    noTeleponRumah?: true
+    sekolahAsal?: true
+    diterimaKelas?: true
+    diterimaTanggal?: true
+    namaAyah?: true
+    namaIbu?: true
+    alamatOrtu?: true
+    noHpOrtu?: true
+    pekerjaanAyah?: true
+    pekerjaanIbu?: true
+    namaWali?: true
+    alamatWali?: true
+    noHpWali?: true
+    pekerjaanWali?: true
     _all?: true
   }
 
@@ -5185,6 +5345,27 @@ export namespace Prisma {
     nama: string
     createdAt: Date
     updatedAt: Date
+    tempatLahir: string | null
+    tanggalLahir: Date | null
+    agama: $Enums.Agama | null
+    nik: string | null
+    statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
+    anakKe: number | null
+    alamatSiswa: string | null
+    noTeleponRumah: string | null
+    sekolahAsal: string | null
+    diterimaKelas: string | null
+    diterimaTanggal: Date | null
+    namaAyah: string | null
+    namaIbu: string | null
+    alamatOrtu: string | null
+    noHpOrtu: string | null
+    pekerjaanAyah: string | null
+    pekerjaanIbu: string | null
+    namaWali: string | null
+    alamatWali: string | null
+    noHpWali: string | null
+    pekerjaanWali: string | null
     _count: SiswaCountAggregateOutputType | null
     _avg: SiswaAvgAggregateOutputType | null
     _sum: SiswaSumAggregateOutputType | null
@@ -5214,6 +5395,27 @@ export namespace Prisma {
     nama?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    tempatLahir?: boolean
+    tanggalLahir?: boolean
+    agama?: boolean
+    nik?: boolean
+    statusDalamKeluarga?: boolean
+    anakKe?: boolean
+    alamatSiswa?: boolean
+    noTeleponRumah?: boolean
+    sekolahAsal?: boolean
+    diterimaKelas?: boolean
+    diterimaTanggal?: boolean
+    namaAyah?: boolean
+    namaIbu?: boolean
+    alamatOrtu?: boolean
+    noHpOrtu?: boolean
+    pekerjaanAyah?: boolean
+    pekerjaanIbu?: boolean
+    namaWali?: boolean
+    alamatWali?: boolean
+    noHpWali?: boolean
+    pekerjaanWali?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     riwayatKelas?: boolean | Siswa$riwayatKelasArgs<ExtArgs>
     nilais?: boolean | Siswa$nilaisArgs<ExtArgs>
@@ -5233,9 +5435,30 @@ export namespace Prisma {
     nama?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    tempatLahir?: boolean
+    tanggalLahir?: boolean
+    agama?: boolean
+    nik?: boolean
+    statusDalamKeluarga?: boolean
+    anakKe?: boolean
+    alamatSiswa?: boolean
+    noTeleponRumah?: boolean
+    sekolahAsal?: boolean
+    diterimaKelas?: boolean
+    diterimaTanggal?: boolean
+    namaAyah?: boolean
+    namaIbu?: boolean
+    alamatOrtu?: boolean
+    noHpOrtu?: boolean
+    pekerjaanAyah?: boolean
+    pekerjaanIbu?: boolean
+    namaWali?: boolean
+    alamatWali?: boolean
+    noHpWali?: boolean
+    pekerjaanWali?: boolean
   }
 
-  export type SiswaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "nisn" | "nis" | "nama" | "createdAt" | "updatedAt", ExtArgs["result"]["siswa"]>
+  export type SiswaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "nisn" | "nis" | "nama" | "createdAt" | "updatedAt" | "tempatLahir" | "tanggalLahir" | "agama" | "nik" | "statusDalamKeluarga" | "anakKe" | "alamatSiswa" | "noTeleponRumah" | "sekolahAsal" | "diterimaKelas" | "diterimaTanggal" | "namaAyah" | "namaIbu" | "alamatOrtu" | "noHpOrtu" | "pekerjaanAyah" | "pekerjaanIbu" | "namaWali" | "alamatWali" | "noHpWali" | "pekerjaanWali", ExtArgs["result"]["siswa"]>
   export type SiswaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     riwayatKelas?: boolean | Siswa$riwayatKelasArgs<ExtArgs>
@@ -5264,6 +5487,27 @@ export namespace Prisma {
       nama: string
       createdAt: Date
       updatedAt: Date
+      tempatLahir: string | null
+      tanggalLahir: Date | null
+      agama: $Enums.Agama | null
+      nik: string | null
+      statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
+      anakKe: number | null
+      alamatSiswa: string | null
+      noTeleponRumah: string | null
+      sekolahAsal: string | null
+      diterimaKelas: string | null
+      diterimaTanggal: Date | null
+      namaAyah: string | null
+      namaIbu: string | null
+      alamatOrtu: string | null
+      noHpOrtu: string | null
+      pekerjaanAyah: string | null
+      pekerjaanIbu: string | null
+      namaWali: string | null
+      alamatWali: string | null
+      noHpWali: string | null
+      pekerjaanWali: string | null
     }, ExtArgs["result"]["siswa"]>
     composites: {}
   }
@@ -5646,6 +5890,27 @@ export namespace Prisma {
     readonly nama: FieldRef<"Siswa", 'String'>
     readonly createdAt: FieldRef<"Siswa", 'DateTime'>
     readonly updatedAt: FieldRef<"Siswa", 'DateTime'>
+    readonly tempatLahir: FieldRef<"Siswa", 'String'>
+    readonly tanggalLahir: FieldRef<"Siswa", 'DateTime'>
+    readonly agama: FieldRef<"Siswa", 'Agama'>
+    readonly nik: FieldRef<"Siswa", 'String'>
+    readonly statusDalamKeluarga: FieldRef<"Siswa", 'StatusDalamKeluarga'>
+    readonly anakKe: FieldRef<"Siswa", 'Int'>
+    readonly alamatSiswa: FieldRef<"Siswa", 'String'>
+    readonly noTeleponRumah: FieldRef<"Siswa", 'String'>
+    readonly sekolahAsal: FieldRef<"Siswa", 'String'>
+    readonly diterimaKelas: FieldRef<"Siswa", 'String'>
+    readonly diterimaTanggal: FieldRef<"Siswa", 'DateTime'>
+    readonly namaAyah: FieldRef<"Siswa", 'String'>
+    readonly namaIbu: FieldRef<"Siswa", 'String'>
+    readonly alamatOrtu: FieldRef<"Siswa", 'String'>
+    readonly noHpOrtu: FieldRef<"Siswa", 'String'>
+    readonly pekerjaanAyah: FieldRef<"Siswa", 'String'>
+    readonly pekerjaanIbu: FieldRef<"Siswa", 'String'>
+    readonly namaWali: FieldRef<"Siswa", 'String'>
+    readonly alamatWali: FieldRef<"Siswa", 'String'>
+    readonly noHpWali: FieldRef<"Siswa", 'String'>
+    readonly pekerjaanWali: FieldRef<"Siswa", 'String'>
   }
     
 
@@ -21535,7 +21800,28 @@ export namespace Prisma {
     nis: 'nis',
     nama: 'nama',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    tempatLahir: 'tempatLahir',
+    tanggalLahir: 'tanggalLahir',
+    agama: 'agama',
+    nik: 'nik',
+    statusDalamKeluarga: 'statusDalamKeluarga',
+    anakKe: 'anakKe',
+    alamatSiswa: 'alamatSiswa',
+    noTeleponRumah: 'noTeleponRumah',
+    sekolahAsal: 'sekolahAsal',
+    diterimaKelas: 'diterimaKelas',
+    diterimaTanggal: 'diterimaTanggal',
+    namaAyah: 'namaAyah',
+    namaIbu: 'namaIbu',
+    alamatOrtu: 'alamatOrtu',
+    noHpOrtu: 'noHpOrtu',
+    pekerjaanAyah: 'pekerjaanAyah',
+    pekerjaanIbu: 'pekerjaanIbu',
+    namaWali: 'namaWali',
+    alamatWali: 'alamatWali',
+    noHpWali: 'noHpWali',
+    pekerjaanWali: 'pekerjaanWali'
   };
 
   export type SiswaScalarFieldEnum = (typeof SiswaScalarFieldEnum)[keyof typeof SiswaScalarFieldEnum]
@@ -21762,7 +22048,23 @@ export namespace Prisma {
   export const SiswaOrderByRelevanceFieldEnum: {
     nisn: 'nisn',
     nis: 'nis',
-    nama: 'nama'
+    nama: 'nama',
+    tempatLahir: 'tempatLahir',
+    nik: 'nik',
+    alamatSiswa: 'alamatSiswa',
+    noTeleponRumah: 'noTeleponRumah',
+    sekolahAsal: 'sekolahAsal',
+    diterimaKelas: 'diterimaKelas',
+    namaAyah: 'namaAyah',
+    namaIbu: 'namaIbu',
+    alamatOrtu: 'alamatOrtu',
+    noHpOrtu: 'noHpOrtu',
+    pekerjaanAyah: 'pekerjaanAyah',
+    pekerjaanIbu: 'pekerjaanIbu',
+    namaWali: 'namaWali',
+    alamatWali: 'alamatWali',
+    noHpWali: 'noHpWali',
+    pekerjaanWali: 'pekerjaanWali'
   };
 
   export type SiswaOrderByRelevanceFieldEnum = (typeof SiswaOrderByRelevanceFieldEnum)[keyof typeof SiswaOrderByRelevanceFieldEnum]
@@ -21876,6 +22178,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Agama'
+   */
+  export type EnumAgamaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Agama'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusDalamKeluarga'
+   */
+  export type EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusDalamKeluarga'>
     
 
 
@@ -22099,6 +22415,27 @@ export namespace Prisma {
     nama?: StringFilter<"Siswa"> | string
     createdAt?: DateTimeFilter<"Siswa"> | Date | string
     updatedAt?: DateTimeFilter<"Siswa"> | Date | string
+    tempatLahir?: StringNullableFilter<"Siswa"> | string | null
+    tanggalLahir?: DateTimeNullableFilter<"Siswa"> | Date | string | null
+    agama?: EnumAgamaNullableFilter<"Siswa"> | $Enums.Agama | null
+    nik?: StringNullableFilter<"Siswa"> | string | null
+    statusDalamKeluarga?: EnumStatusDalamKeluargaNullableFilter<"Siswa"> | $Enums.StatusDalamKeluarga | null
+    anakKe?: IntNullableFilter<"Siswa"> | number | null
+    alamatSiswa?: StringNullableFilter<"Siswa"> | string | null
+    noTeleponRumah?: StringNullableFilter<"Siswa"> | string | null
+    sekolahAsal?: StringNullableFilter<"Siswa"> | string | null
+    diterimaKelas?: StringNullableFilter<"Siswa"> | string | null
+    diterimaTanggal?: DateTimeNullableFilter<"Siswa"> | Date | string | null
+    namaAyah?: StringNullableFilter<"Siswa"> | string | null
+    namaIbu?: StringNullableFilter<"Siswa"> | string | null
+    alamatOrtu?: StringNullableFilter<"Siswa"> | string | null
+    noHpOrtu?: StringNullableFilter<"Siswa"> | string | null
+    pekerjaanAyah?: StringNullableFilter<"Siswa"> | string | null
+    pekerjaanIbu?: StringNullableFilter<"Siswa"> | string | null
+    namaWali?: StringNullableFilter<"Siswa"> | string | null
+    alamatWali?: StringNullableFilter<"Siswa"> | string | null
+    noHpWali?: StringNullableFilter<"Siswa"> | string | null
+    pekerjaanWali?: StringNullableFilter<"Siswa"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     riwayatKelas?: RiwayatKelasListRelationFilter
     nilais?: NilaiListRelationFilter
@@ -22115,6 +22452,27 @@ export namespace Prisma {
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tempatLahir?: SortOrderInput | SortOrder
+    tanggalLahir?: SortOrderInput | SortOrder
+    agama?: SortOrderInput | SortOrder
+    nik?: SortOrderInput | SortOrder
+    statusDalamKeluarga?: SortOrderInput | SortOrder
+    anakKe?: SortOrderInput | SortOrder
+    alamatSiswa?: SortOrderInput | SortOrder
+    noTeleponRumah?: SortOrderInput | SortOrder
+    sekolahAsal?: SortOrderInput | SortOrder
+    diterimaKelas?: SortOrderInput | SortOrder
+    diterimaTanggal?: SortOrderInput | SortOrder
+    namaAyah?: SortOrderInput | SortOrder
+    namaIbu?: SortOrderInput | SortOrder
+    alamatOrtu?: SortOrderInput | SortOrder
+    noHpOrtu?: SortOrderInput | SortOrder
+    pekerjaanAyah?: SortOrderInput | SortOrder
+    pekerjaanIbu?: SortOrderInput | SortOrder
+    namaWali?: SortOrderInput | SortOrder
+    alamatWali?: SortOrderInput | SortOrder
+    noHpWali?: SortOrderInput | SortOrder
+    pekerjaanWali?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     riwayatKelas?: RiwayatKelasOrderByRelationAggregateInput
     nilais?: NilaiOrderByRelationAggregateInput
@@ -22129,19 +22487,40 @@ export namespace Prisma {
     userId?: number
     nisn?: string
     nis?: string
+    nik?: string
     AND?: SiswaWhereInput | SiswaWhereInput[]
     OR?: SiswaWhereInput[]
     NOT?: SiswaWhereInput | SiswaWhereInput[]
     nama?: StringFilter<"Siswa"> | string
     createdAt?: DateTimeFilter<"Siswa"> | Date | string
     updatedAt?: DateTimeFilter<"Siswa"> | Date | string
+    tempatLahir?: StringNullableFilter<"Siswa"> | string | null
+    tanggalLahir?: DateTimeNullableFilter<"Siswa"> | Date | string | null
+    agama?: EnumAgamaNullableFilter<"Siswa"> | $Enums.Agama | null
+    statusDalamKeluarga?: EnumStatusDalamKeluargaNullableFilter<"Siswa"> | $Enums.StatusDalamKeluarga | null
+    anakKe?: IntNullableFilter<"Siswa"> | number | null
+    alamatSiswa?: StringNullableFilter<"Siswa"> | string | null
+    noTeleponRumah?: StringNullableFilter<"Siswa"> | string | null
+    sekolahAsal?: StringNullableFilter<"Siswa"> | string | null
+    diterimaKelas?: StringNullableFilter<"Siswa"> | string | null
+    diterimaTanggal?: DateTimeNullableFilter<"Siswa"> | Date | string | null
+    namaAyah?: StringNullableFilter<"Siswa"> | string | null
+    namaIbu?: StringNullableFilter<"Siswa"> | string | null
+    alamatOrtu?: StringNullableFilter<"Siswa"> | string | null
+    noHpOrtu?: StringNullableFilter<"Siswa"> | string | null
+    pekerjaanAyah?: StringNullableFilter<"Siswa"> | string | null
+    pekerjaanIbu?: StringNullableFilter<"Siswa"> | string | null
+    namaWali?: StringNullableFilter<"Siswa"> | string | null
+    alamatWali?: StringNullableFilter<"Siswa"> | string | null
+    noHpWali?: StringNullableFilter<"Siswa"> | string | null
+    pekerjaanWali?: StringNullableFilter<"Siswa"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     riwayatKelas?: RiwayatKelasListRelationFilter
     nilais?: NilaiListRelationFilter
     nilaiEkskuls?: NilaiEkskulListRelationFilter
     nilaiKokurikulers?: NilaiKokurikulerListRelationFilter
     kehadiranSiswas?: KehadiranSiswaListRelationFilter
-  }, "id" | "userId" | "nisn" | "nis">
+  }, "id" | "userId" | "nisn" | "nis" | "nik">
 
   export type SiswaOrderByWithAggregationInput = {
     id?: SortOrder
@@ -22151,6 +22530,27 @@ export namespace Prisma {
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tempatLahir?: SortOrderInput | SortOrder
+    tanggalLahir?: SortOrderInput | SortOrder
+    agama?: SortOrderInput | SortOrder
+    nik?: SortOrderInput | SortOrder
+    statusDalamKeluarga?: SortOrderInput | SortOrder
+    anakKe?: SortOrderInput | SortOrder
+    alamatSiswa?: SortOrderInput | SortOrder
+    noTeleponRumah?: SortOrderInput | SortOrder
+    sekolahAsal?: SortOrderInput | SortOrder
+    diterimaKelas?: SortOrderInput | SortOrder
+    diterimaTanggal?: SortOrderInput | SortOrder
+    namaAyah?: SortOrderInput | SortOrder
+    namaIbu?: SortOrderInput | SortOrder
+    alamatOrtu?: SortOrderInput | SortOrder
+    noHpOrtu?: SortOrderInput | SortOrder
+    pekerjaanAyah?: SortOrderInput | SortOrder
+    pekerjaanIbu?: SortOrderInput | SortOrder
+    namaWali?: SortOrderInput | SortOrder
+    alamatWali?: SortOrderInput | SortOrder
+    noHpWali?: SortOrderInput | SortOrder
+    pekerjaanWali?: SortOrderInput | SortOrder
     _count?: SiswaCountOrderByAggregateInput
     _avg?: SiswaAvgOrderByAggregateInput
     _max?: SiswaMaxOrderByAggregateInput
@@ -22169,6 +22569,27 @@ export namespace Prisma {
     nama?: StringWithAggregatesFilter<"Siswa"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Siswa"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Siswa"> | Date | string
+    tempatLahir?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    tanggalLahir?: DateTimeNullableWithAggregatesFilter<"Siswa"> | Date | string | null
+    agama?: EnumAgamaNullableWithAggregatesFilter<"Siswa"> | $Enums.Agama | null
+    nik?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    statusDalamKeluarga?: EnumStatusDalamKeluargaNullableWithAggregatesFilter<"Siswa"> | $Enums.StatusDalamKeluarga | null
+    anakKe?: IntNullableWithAggregatesFilter<"Siswa"> | number | null
+    alamatSiswa?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    noTeleponRumah?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    sekolahAsal?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    diterimaKelas?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    diterimaTanggal?: DateTimeNullableWithAggregatesFilter<"Siswa"> | Date | string | null
+    namaAyah?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    namaIbu?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    alamatOrtu?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    noHpOrtu?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    pekerjaanAyah?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    pekerjaanIbu?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    namaWali?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    alamatWali?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    noHpWali?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
+    pekerjaanWali?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
   }
 
   export type MapelWhereInput = {
@@ -23408,6 +23829,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     user: UserCreateNestedOneWithoutSiswaInput
     riwayatKelas?: RiwayatKelasCreateNestedManyWithoutSiswaInput
     nilais?: NilaiCreateNestedManyWithoutSiswaInput
@@ -23424,6 +23866,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasUncheckedCreateNestedManyWithoutSiswaInput
     nilais?: NilaiUncheckedCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulUncheckedCreateNestedManyWithoutSiswaInput
@@ -23437,6 +23900,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSiswaNestedInput
     riwayatKelas?: RiwayatKelasUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUpdateManyWithoutSiswaNestedInput
@@ -23453,6 +23937,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUncheckedUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUncheckedUpdateManyWithoutSiswaNestedInput
@@ -23468,6 +23973,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
   }
 
   export type SiswaUpdateManyMutationInput = {
@@ -23476,6 +24002,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SiswaUncheckedUpdateManyInput = {
@@ -23486,6 +24033,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MapelCreateInput = {
@@ -24770,6 +25338,31 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumAgamaNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Agama | EnumAgamaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Agama[] | null
+    notIn?: $Enums.Agama[] | null
+    not?: NestedEnumAgamaNullableFilter<$PrismaModel> | $Enums.Agama | null
+  }
+
+  export type EnumStatusDalamKeluargaNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusDalamKeluarga | EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusDalamKeluarga[] | null
+    notIn?: $Enums.StatusDalamKeluarga[] | null
+    not?: NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel> | $Enums.StatusDalamKeluarga | null
+  }
+
   export type RiwayatKelasListRelationFilter = {
     every?: RiwayatKelasWhereInput
     some?: RiwayatKelasWhereInput
@@ -24834,11 +25427,33 @@ export namespace Prisma {
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tempatLahir?: SortOrder
+    tanggalLahir?: SortOrder
+    agama?: SortOrder
+    nik?: SortOrder
+    statusDalamKeluarga?: SortOrder
+    anakKe?: SortOrder
+    alamatSiswa?: SortOrder
+    noTeleponRumah?: SortOrder
+    sekolahAsal?: SortOrder
+    diterimaKelas?: SortOrder
+    diterimaTanggal?: SortOrder
+    namaAyah?: SortOrder
+    namaIbu?: SortOrder
+    alamatOrtu?: SortOrder
+    noHpOrtu?: SortOrder
+    pekerjaanAyah?: SortOrder
+    pekerjaanIbu?: SortOrder
+    namaWali?: SortOrder
+    alamatWali?: SortOrder
+    noHpWali?: SortOrder
+    pekerjaanWali?: SortOrder
   }
 
   export type SiswaAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    anakKe?: SortOrder
   }
 
   export type SiswaMaxOrderByAggregateInput = {
@@ -24849,6 +25464,27 @@ export namespace Prisma {
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tempatLahir?: SortOrder
+    tanggalLahir?: SortOrder
+    agama?: SortOrder
+    nik?: SortOrder
+    statusDalamKeluarga?: SortOrder
+    anakKe?: SortOrder
+    alamatSiswa?: SortOrder
+    noTeleponRumah?: SortOrder
+    sekolahAsal?: SortOrder
+    diterimaKelas?: SortOrder
+    diterimaTanggal?: SortOrder
+    namaAyah?: SortOrder
+    namaIbu?: SortOrder
+    alamatOrtu?: SortOrder
+    noHpOrtu?: SortOrder
+    pekerjaanAyah?: SortOrder
+    pekerjaanIbu?: SortOrder
+    namaWali?: SortOrder
+    alamatWali?: SortOrder
+    noHpWali?: SortOrder
+    pekerjaanWali?: SortOrder
   }
 
   export type SiswaMinOrderByAggregateInput = {
@@ -24859,11 +25495,67 @@ export namespace Prisma {
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    tempatLahir?: SortOrder
+    tanggalLahir?: SortOrder
+    agama?: SortOrder
+    nik?: SortOrder
+    statusDalamKeluarga?: SortOrder
+    anakKe?: SortOrder
+    alamatSiswa?: SortOrder
+    noTeleponRumah?: SortOrder
+    sekolahAsal?: SortOrder
+    diterimaKelas?: SortOrder
+    diterimaTanggal?: SortOrder
+    namaAyah?: SortOrder
+    namaIbu?: SortOrder
+    alamatOrtu?: SortOrder
+    noHpOrtu?: SortOrder
+    pekerjaanAyah?: SortOrder
+    pekerjaanIbu?: SortOrder
+    namaWali?: SortOrder
+    alamatWali?: SortOrder
+    noHpWali?: SortOrder
+    pekerjaanWali?: SortOrder
   }
 
   export type SiswaSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    anakKe?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumAgamaNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Agama | EnumAgamaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Agama[] | null
+    notIn?: $Enums.Agama[] | null
+    not?: NestedEnumAgamaNullableWithAggregatesFilter<$PrismaModel> | $Enums.Agama | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumAgamaNullableFilter<$PrismaModel>
+    _max?: NestedEnumAgamaNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatusDalamKeluargaNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusDalamKeluarga | EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusDalamKeluarga[] | null
+    notIn?: $Enums.StatusDalamKeluarga[] | null
+    not?: NestedEnumStatusDalamKeluargaNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatusDalamKeluarga | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel>
   }
 
   export type EnumKategoriMapelFilter<$PrismaModel = never> = {
@@ -26042,6 +26734,18 @@ export namespace Prisma {
     connectOrCreate?: KehadiranSiswaCreateOrConnectWithoutSiswaInput | KehadiranSiswaCreateOrConnectWithoutSiswaInput[]
     createMany?: KehadiranSiswaCreateManySiswaInputEnvelope
     connect?: KehadiranSiswaWhereUniqueInput | KehadiranSiswaWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type NullableEnumAgamaFieldUpdateOperationsInput = {
+    set?: $Enums.Agama | null
+  }
+
+  export type NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput = {
+    set?: $Enums.StatusDalamKeluarga | null
   }
 
   export type UserUpdateOneRequiredWithoutSiswaNestedInput = {
@@ -27406,6 +28110,65 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumAgamaNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Agama | EnumAgamaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Agama[] | null
+    notIn?: $Enums.Agama[] | null
+    not?: NestedEnumAgamaNullableFilter<$PrismaModel> | $Enums.Agama | null
+  }
+
+  export type NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusDalamKeluarga | EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusDalamKeluarga[] | null
+    notIn?: $Enums.StatusDalamKeluarga[] | null
+    not?: NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel> | $Enums.StatusDalamKeluarga | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAgamaNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Agama | EnumAgamaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Agama[] | null
+    notIn?: $Enums.Agama[] | null
+    not?: NestedEnumAgamaNullableWithAggregatesFilter<$PrismaModel> | $Enums.Agama | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumAgamaNullableFilter<$PrismaModel>
+    _max?: NestedEnumAgamaNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatusDalamKeluargaNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusDalamKeluarga | EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatusDalamKeluarga[] | null
+    notIn?: $Enums.StatusDalamKeluarga[] | null
+    not?: NestedEnumStatusDalamKeluargaNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatusDalamKeluarga | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumKategoriMapelFilter<$PrismaModel = never> = {
     equals?: $Enums.KategoriMapel | EnumKategoriMapelFieldRefInput<$PrismaModel>
     in?: $Enums.KategoriMapel[]
@@ -27501,6 +28264,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasCreateNestedManyWithoutSiswaInput
     nilais?: NilaiCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulCreateNestedManyWithoutSiswaInput
@@ -27515,6 +28299,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasUncheckedCreateNestedManyWithoutSiswaInput
     nilais?: NilaiUncheckedCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulUncheckedCreateNestedManyWithoutSiswaInput
@@ -27601,6 +28406,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUpdateManyWithoutSiswaNestedInput
@@ -27615,6 +28441,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUncheckedUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUncheckedUpdateManyWithoutSiswaNestedInput
@@ -29151,6 +29998,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     user: UserCreateNestedOneWithoutSiswaInput
     nilais?: NilaiCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulCreateNestedManyWithoutSiswaInput
@@ -29166,6 +30034,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     nilais?: NilaiUncheckedCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulUncheckedCreateNestedManyWithoutSiswaInput
     nilaiKokurikulers?: NilaiKokurikulerUncheckedCreateNestedManyWithoutSiswaInput
@@ -29252,6 +30141,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSiswaNestedInput
     nilais?: NilaiUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUpdateManyWithoutSiswaNestedInput
@@ -29267,6 +30177,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     nilais?: NilaiUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiKokurikulers?: NilaiKokurikulerUncheckedUpdateManyWithoutSiswaNestedInput
@@ -29456,6 +30387,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     user: UserCreateNestedOneWithoutSiswaInput
     riwayatKelas?: RiwayatKelasCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulCreateNestedManyWithoutSiswaInput
@@ -29471,6 +30423,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasUncheckedCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulUncheckedCreateNestedManyWithoutSiswaInput
     nilaiKokurikulers?: NilaiKokurikulerUncheckedCreateNestedManyWithoutSiswaInput
@@ -29548,6 +30521,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSiswaNestedInput
     riwayatKelas?: RiwayatKelasUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUpdateManyWithoutSiswaNestedInput
@@ -29563,6 +30557,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiKokurikulers?: NilaiKokurikulerUncheckedUpdateManyWithoutSiswaNestedInput
@@ -29729,6 +30744,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     user: UserCreateNestedOneWithoutSiswaInput
     riwayatKelas?: RiwayatKelasCreateNestedManyWithoutSiswaInput
     nilais?: NilaiCreateNestedManyWithoutSiswaInput
@@ -29744,6 +30780,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasUncheckedCreateNestedManyWithoutSiswaInput
     nilais?: NilaiUncheckedCreateNestedManyWithoutSiswaInput
     nilaiKokurikulers?: NilaiKokurikulerUncheckedCreateNestedManyWithoutSiswaInput
@@ -29824,6 +30881,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSiswaNestedInput
     riwayatKelas?: RiwayatKelasUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUpdateManyWithoutSiswaNestedInput
@@ -29839,6 +30917,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUncheckedUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiKokurikulers?: NilaiKokurikulerUncheckedUpdateManyWithoutSiswaNestedInput
@@ -29915,6 +31014,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     user: UserCreateNestedOneWithoutSiswaInput
     riwayatKelas?: RiwayatKelasCreateNestedManyWithoutSiswaInput
     nilais?: NilaiCreateNestedManyWithoutSiswaInput
@@ -29930,6 +31050,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasUncheckedCreateNestedManyWithoutSiswaInput
     nilais?: NilaiUncheckedCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulUncheckedCreateNestedManyWithoutSiswaInput
@@ -30010,6 +31151,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSiswaNestedInput
     riwayatKelas?: RiwayatKelasUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUpdateManyWithoutSiswaNestedInput
@@ -30025,6 +31187,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUncheckedUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUncheckedUpdateManyWithoutSiswaNestedInput
@@ -30101,6 +31284,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     user: UserCreateNestedOneWithoutSiswaInput
     riwayatKelas?: RiwayatKelasCreateNestedManyWithoutSiswaInput
     nilais?: NilaiCreateNestedManyWithoutSiswaInput
@@ -30116,6 +31320,27 @@ export namespace Prisma {
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    tempatLahir?: string | null
+    tanggalLahir?: Date | string | null
+    agama?: $Enums.Agama | null
+    nik?: string | null
+    statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
+    anakKe?: number | null
+    alamatSiswa?: string | null
+    noTeleponRumah?: string | null
+    sekolahAsal?: string | null
+    diterimaKelas?: string | null
+    diterimaTanggal?: Date | string | null
+    namaAyah?: string | null
+    namaIbu?: string | null
+    alamatOrtu?: string | null
+    noHpOrtu?: string | null
+    pekerjaanAyah?: string | null
+    pekerjaanIbu?: string | null
+    namaWali?: string | null
+    alamatWali?: string | null
+    noHpWali?: string | null
+    pekerjaanWali?: string | null
     riwayatKelas?: RiwayatKelasUncheckedCreateNestedManyWithoutSiswaInput
     nilais?: NilaiUncheckedCreateNestedManyWithoutSiswaInput
     nilaiEkskuls?: NilaiEkskulUncheckedCreateNestedManyWithoutSiswaInput
@@ -30178,6 +31403,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSiswaNestedInput
     riwayatKelas?: RiwayatKelasUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUpdateManyWithoutSiswaNestedInput
@@ -30193,6 +31439,27 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    nik?: NullableStringFieldUpdateOperationsInput | string | null
+    statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
+    anakKe?: NullableIntFieldUpdateOperationsInput | number | null
+    alamatSiswa?: NullableStringFieldUpdateOperationsInput | string | null
+    noTeleponRumah?: NullableStringFieldUpdateOperationsInput | string | null
+    sekolahAsal?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaKelas?: NullableStringFieldUpdateOperationsInput | string | null
+    diterimaTanggal?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    namaAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    namaIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpOrtu?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanAyah?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanIbu?: NullableStringFieldUpdateOperationsInput | string | null
+    namaWali?: NullableStringFieldUpdateOperationsInput | string | null
+    alamatWali?: NullableStringFieldUpdateOperationsInput | string | null
+    noHpWali?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaanWali?: NullableStringFieldUpdateOperationsInput | string | null
     riwayatKelas?: RiwayatKelasUncheckedUpdateManyWithoutSiswaNestedInput
     nilais?: NilaiUncheckedUpdateManyWithoutSiswaNestedInput
     nilaiEkskuls?: NilaiEkskulUncheckedUpdateManyWithoutSiswaNestedInput

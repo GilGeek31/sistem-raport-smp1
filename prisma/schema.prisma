@@ -31,6 +31,22 @@ enum KategoriMapel {
   PEMINATAN
 }
 
+enum Agama {
+  ISLAM
+  KRISTEN
+  KATOLIK
+  HINDU
+  BUDDHA
+  KONGHUCU
+  LAINNYA
+}
+
+enum StatusDalamKeluarga {
+  ANAK_KANDUNG
+  ANAK_ANGKAT
+  ANAK_TIRI
+}
+
 // =========================================
 // AUTENTIKASI & PENGGUNA
 // =========================================
@@ -81,6 +97,37 @@ model Siswa {
   nama      String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  // --- Data kelahiran & identitas ---
+  tempatLahir          String?               @map("tempat_lahir")
+  tanggalLahir         DateTime?             @map("tanggal_lahir")
+  agama                Agama?
+  nik                  String?               @unique
+  statusDalamKeluarga  StatusDalamKeluarga?  @map("status_dalam_keluarga")
+  anakKe               Int?                  @map("anak_ke")
+
+  // --- Alamat & kontak siswa ---
+  alamatSiswa      String?   @map("alamat_siswa") @db.Text
+  noTeleponRumah   String?   @map("no_telepon_rumah")
+
+  // --- Riwayat penerimaan ---
+  sekolahAsal      String?   @map("sekolah_asal")
+  diterimaKelas    String?   @map("diterima_kelas")
+  diterimaTanggal  DateTime? @map("diterima_tanggal")
+
+  // --- Data orang tua ---
+  namaAyah       String?   @map("nama_ayah")
+  namaIbu        String?   @map("nama_ibu")
+  alamatOrtu     String?   @map("alamat_ortu") @db.Text
+  noHpOrtu       String?   @map("no_hp_ortu")
+  pekerjaanAyah  String?   @map("pekerjaan_ayah")
+  pekerjaanIbu   String?   @map("pekerjaan_ibu")
+
+  // --- Data wali (kalau ada) ---
+  namaWali       String?   @map("nama_wali")
+  alamatWali     String?   @map("alamat_wali") @db.Text
+  noHpWali       String?   @map("no_hp_wali")
+  pekerjaanWali  String?   @map("pekerjaan_wali")
 
   user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   riwayatKelas       RiwayatKelas[]

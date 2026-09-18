@@ -8,6 +8,32 @@ const updateSiswaSchema = z.object({
   nisn: z.string().min(1).optional(),
   nis: z.string().optional(),
   nama: z.string().min(1).optional(),
+
+  tempatLahir: z.string().optional(),
+  tanggalLahir: z.string().optional(),
+  agama: z.enum(['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDDHA', 'KONGHUCU', 'LAINNYA']).optional(),
+  nik: z.string().optional(),
+  statusDalamKeluarga: z.enum(['ANAK_KANDUNG', 'ANAK_ANGKAT', 'ANAK_TIRI']).optional(),
+  anakKe: z.number().int().optional(),
+
+  alamatSiswa: z.string().optional(),
+  noTeleponRumah: z.string().optional(),
+
+  sekolahAsal: z.string().optional(),
+  diterimaKelas: z.string().optional(),
+  diterimaTanggal: z.string().optional(),
+
+  namaAyah: z.string().optional(),
+  namaIbu: z.string().optional(),
+  alamatOrtu: z.string().optional(),
+  noHpOrtu: z.string().optional(),
+  pekerjaanAyah: z.string().optional(),
+  pekerjaanIbu: z.string().optional(),
+
+  namaWali: z.string().optional(),
+  alamatWali: z.string().optional(),
+  noHpWali: z.string().optional(),
+  pekerjaanWali: z.string().optional(),
 });
 
 // PUT /api/v1/siswas/:id
@@ -29,9 +55,15 @@ export async function PUT(
   const siswa = await prisma.siswa.findUnique({ where: { id: Number(id) } });
   if (!siswa) return apiError('Siswa tidak ditemukan', 404);
 
+  const { tanggalLahir, diterimaTanggal, ...dataLain } = parsed.data;
+
   const updated = await prisma.siswa.update({
     where: { id: Number(id) },
-    data: parsed.data,
+    data: {
+      ...dataLain,
+      tanggalLahir: tanggalLahir ? new Date(tanggalLahir) : undefined,
+      diterimaTanggal: diterimaTanggal ? new Date(diterimaTanggal) : undefined,
+    },
   });
 
   return apiSuccess(updated, 'Data siswa berhasil diperbarui');

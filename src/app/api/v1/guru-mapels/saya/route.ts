@@ -20,7 +20,13 @@ export async function GET() {
     where: { guruId: guru.id },
     include: {
       mapel: { select: { id: true, nama: true, kode: true } },
-      kelas: { select: { id: true, nama: true } },
+      kelas: {
+        select: {
+          id: true,
+          nama: true,
+          tahunAjaran: { select: { tahun: true, semester: true } },
+        },
+      },
     },
   });
 
