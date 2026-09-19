@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/AppShell';
 
 const AGAMA_OPTIONS = ['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDDHA', 'KONGHUCU', 'LAINNYA'];
+const JENIS_KELAMIN_OPTIONS = ['LAKI_LAKI', 'PEREMPUAN'];
 const STATUS_KELUARGA_OPTIONS = ['ANAK_KANDUNG', 'ANAK_ANGKAT', 'ANAK_TIRI'];
 
 const initialForm = {
   // Akun
   email: '', nisn: '', nis: '', nama: '', password: '',
   // Data diri
-  tempatLahir: '', tanggalLahir: '', agama: '', nik: '',
+  tempatLahir: '', tanggalLahir: '', jenisKelamin: '', agama: '', nik: '',
   statusDalamKeluarga: '', anakKe: '',
   // Alamat & kontak
   alamatSiswa: '', noTeleponRumah: '',
@@ -88,7 +89,7 @@ export default function InputSiswaPage() {
         <Section title="Akun">
           <Grid>
             <Field label="Nama lengkap *" value={form.nama} onChange={(v) => ubah('nama', v)} required />
-            <Field label="Email *" type="email" value={form.email} onChange={(v) => ubah('email', v)} required />
+            <Field label="Email (opsional)" type="email" value={form.email} onChange={(v) => ubah('email', v)} />
             <Field label="NISN *" value={form.nisn} onChange={(v) => ubah('nisn', v)} required />
             <Field label="NIS" value={form.nis} onChange={(v) => ubah('nis', v)} />
             <Field
@@ -104,6 +105,12 @@ export default function InputSiswaPage() {
           <Grid>
             <Field label="Tempat lahir" value={form.tempatLahir} onChange={(v) => ubah('tempatLahir', v)} />
             <Field label="Tanggal lahir" type="date" value={form.tanggalLahir} onChange={(v) => ubah('tanggalLahir', v)} />
+            <SelectField
+              label="Jenis kelamin"
+              value={form.jenisKelamin}
+              onChange={(v) => ubah('jenisKelamin', v)}
+              options={JENIS_KELAMIN_OPTIONS}
+            />
             <SelectField
               label="Agama"
               value={form.agama}

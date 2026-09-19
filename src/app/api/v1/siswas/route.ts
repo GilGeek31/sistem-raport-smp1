@@ -6,7 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { apiSuccess, apiError } from '@/lib/api-response';
 
 const createSiswaSchema = z.object({
-  email: z.string().email('Email tidak valid'),
+  email: z.string().email('Email tidak valid').optional().or(z.literal('')),
   nisn: z.string().min(1, 'NISN wajib diisi'),
   nis: z.string().optional(),
   nama: z.string().min(1, 'Nama wajib diisi'),
@@ -16,6 +16,7 @@ const createSiswaSchema = z.object({
   tempatLahir: z.string().optional(),
   tanggalLahir: z.string().optional(), // format "YYYY-MM-DD", dikonversi ke Date di bawah
   agama: z.enum(['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDDHA', 'KONGHUCU', 'LAINNYA']).optional(),
+  jenisKelamin: z.enum(['LAKI_LAKI', 'PEREMPUAN']).optional(),
   nik: z.string().optional(),
   statusDalamKeluarga: z.enum(['ANAK_KANDUNG', 'ANAK_ANGKAT', 'ANAK_TIRI']).optional(),
   anakKe: z.number().int().optional(),
@@ -77,20 +78,25 @@ export async function POST(req: NextRequest) {
   }
 
   const {
-    email, nisn, nis, nama, password,
+    email: _emailMentah, nisn, nis, nama, password,
     tanggalLahir, diterimaTanggal,
     ...biodataLain
   } = parsed.data;
 
-  // Cek duplikat sebelum mulai transaction, supaya pesan errornya jelas
-  const emailDipakai = await prisma.user.findUnique({ where: { email } });
-  if (emailDipakai) return apiError(`Email "${email}" sudah digunakan`, 409);
+  // Kalau email dikirim string kosong "", anggap sama dengan tidak diisi.
+  // Siswa boleh login pakai NISN saja, jadi email memang opsional.
+  const email = parsed.data.email && parsed.data.email !== '' ? parsed.data.email : undefined;
+
+  if (email) {
+    const emailDipakai = await prisma.user.findUnique({ where: { email } });
+    if (emailDipakai) return apiError(`Email "${email}" sudah digunakan`, 409);
+  }
 
   const nisnDipakai = await prisma.siswa.findUnique({ where: { nisn } });
   if (nisnDipakai) return apiError(`NISN "${nisn}" sudah digunakan`, 409);
 
   if (biodataLain.nik) {
-    const nikDipakai = await prisma.siswa.findUnique({ where: { nik : biodataLain.nik } });
+    const nikDipakai = await prisma.siswa.findUnique({ where: { nik: biodataLain.nik } });
     if (nikDipakai) return apiError(`NIK "${biodataLain.nik}" sudah digunakan`, 409);
   }
 

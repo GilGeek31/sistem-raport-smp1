@@ -157,6 +157,7 @@ exports.Prisma.SiswaScalarFieldEnum = {
   tempatLahir: 'tempatLahir',
   tanggalLahir: 'tanggalLahir',
   agama: 'agama',
+  jenisKelamin: 'jenisKelamin',
   nik: 'nik',
   statusDalamKeluarga: 'statusDalamKeluarga',
   anakKe: 'anakKe',
@@ -421,6 +422,11 @@ exports.Agama = exports.$Enums.Agama = {
   BUDDHA: 'BUDDHA',
   KONGHUCU: 'KONGHUCU',
   LAINNYA: 'LAINNYA'
+};
+
+exports.JenisKelamin = exports.$Enums.JenisKelamin = {
+  LAKI_LAKI: 'LAKI_LAKI',
+  PEREMPUAN: 'PEREMPUAN'
 };
 
 exports.StatusDalamKeluarga = exports.$Enums.StatusDalamKeluarga = {

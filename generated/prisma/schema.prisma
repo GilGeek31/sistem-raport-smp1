@@ -47,13 +47,18 @@ enum StatusDalamKeluarga {
   ANAK_TIRI
 }
 
+enum JenisKelamin {
+  LAKI_LAKI
+  PEREMPUAN
+}
+
 // =========================================
 // AUTENTIKASI & PENGGUNA
 // =========================================
 
 model User {
   id           Int      @id @default(autoincrement())
-  email        String   @unique
+  email        String?  @unique
   password     String
   role         Role
   fotoProfil   String?  @map("foto_profil")
@@ -102,6 +107,7 @@ model Siswa {
   tempatLahir         String?              @map("tempat_lahir")
   tanggalLahir        DateTime?            @map("tanggal_lahir")
   agama               Agama?
+  jenisKelamin        JenisKelamin?        @map("jenis_kelamin")
   nik                 String?              @unique
   statusDalamKeluarga StatusDalamKeluarga? @map("status_dalam_keluarga")
   anakKe              Int?                 @map("anak_ke")

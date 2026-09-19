@@ -12,6 +12,7 @@ const updateSiswaSchema = z.object({
   tempatLahir: z.string().optional(),
   tanggalLahir: z.string().optional(),
   agama: z.enum(['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDDHA', 'KONGHUCU', 'LAINNYA']).optional(),
+  jenisKelamin: z.enum(['LAKI_LAKI', 'PEREMPUAN']).optional(),
   nik: z.string().optional(),
   statusDalamKeluarga: z.enum(['ANAK_KANDUNG', 'ANAK_ANGKAT', 'ANAK_TIRI']).optional(),
   anakKe: z.number().int().optional(),

@@ -158,6 +158,14 @@ export const StatusDalamKeluarga: {
 
 export type StatusDalamKeluarga = (typeof StatusDalamKeluarga)[keyof typeof StatusDalamKeluarga]
 
+
+export const JenisKelamin: {
+  LAKI_LAKI: 'LAKI_LAKI',
+  PEREMPUAN: 'PEREMPUAN'
+};
+
+export type JenisKelamin = (typeof JenisKelamin)[keyof typeof JenisKelamin]
+
 }
 
 export type Role = $Enums.Role
@@ -179,6 +187,10 @@ export const Agama: typeof $Enums.Agama
 export type StatusDalamKeluarga = $Enums.StatusDalamKeluarga
 
 export const StatusDalamKeluarga: typeof $Enums.StatusDalamKeluarga
+
+export type JenisKelamin = $Enums.JenisKelamin
+
+export const JenisKelamin: typeof $Enums.JenisKelamin
 
 /**
  * ##  Prisma Client ʲˢ
@@ -3061,7 +3073,7 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: number
-    email: string
+    email: string | null
     password: string
     role: $Enums.Role
     fotoProfil: string | null
@@ -3149,7 +3161,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      email: string
+      email: string | null
       password: string
       role: $Enums.Role
       fotoProfil: string | null
@@ -5061,6 +5073,7 @@ export namespace Prisma {
     tempatLahir: string | null
     tanggalLahir: Date | null
     agama: $Enums.Agama | null
+    jenisKelamin: $Enums.JenisKelamin | null
     nik: string | null
     statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
     anakKe: number | null
@@ -5092,6 +5105,7 @@ export namespace Prisma {
     tempatLahir: string | null
     tanggalLahir: Date | null
     agama: $Enums.Agama | null
+    jenisKelamin: $Enums.JenisKelamin | null
     nik: string | null
     statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
     anakKe: number | null
@@ -5123,6 +5137,7 @@ export namespace Prisma {
     tempatLahir: number
     tanggalLahir: number
     agama: number
+    jenisKelamin: number
     nik: number
     statusDalamKeluarga: number
     anakKe: number
@@ -5168,6 +5183,7 @@ export namespace Prisma {
     tempatLahir?: true
     tanggalLahir?: true
     agama?: true
+    jenisKelamin?: true
     nik?: true
     statusDalamKeluarga?: true
     anakKe?: true
@@ -5199,6 +5215,7 @@ export namespace Prisma {
     tempatLahir?: true
     tanggalLahir?: true
     agama?: true
+    jenisKelamin?: true
     nik?: true
     statusDalamKeluarga?: true
     anakKe?: true
@@ -5230,6 +5247,7 @@ export namespace Prisma {
     tempatLahir?: true
     tanggalLahir?: true
     agama?: true
+    jenisKelamin?: true
     nik?: true
     statusDalamKeluarga?: true
     anakKe?: true
@@ -5348,6 +5366,7 @@ export namespace Prisma {
     tempatLahir: string | null
     tanggalLahir: Date | null
     agama: $Enums.Agama | null
+    jenisKelamin: $Enums.JenisKelamin | null
     nik: string | null
     statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
     anakKe: number | null
@@ -5398,6 +5417,7 @@ export namespace Prisma {
     tempatLahir?: boolean
     tanggalLahir?: boolean
     agama?: boolean
+    jenisKelamin?: boolean
     nik?: boolean
     statusDalamKeluarga?: boolean
     anakKe?: boolean
@@ -5438,6 +5458,7 @@ export namespace Prisma {
     tempatLahir?: boolean
     tanggalLahir?: boolean
     agama?: boolean
+    jenisKelamin?: boolean
     nik?: boolean
     statusDalamKeluarga?: boolean
     anakKe?: boolean
@@ -5458,7 +5479,7 @@ export namespace Prisma {
     pekerjaanWali?: boolean
   }
 
-  export type SiswaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "nisn" | "nis" | "nama" | "createdAt" | "updatedAt" | "tempatLahir" | "tanggalLahir" | "agama" | "nik" | "statusDalamKeluarga" | "anakKe" | "alamatSiswa" | "noTeleponRumah" | "sekolahAsal" | "diterimaKelas" | "diterimaTanggal" | "namaAyah" | "namaIbu" | "alamatOrtu" | "noHpOrtu" | "pekerjaanAyah" | "pekerjaanIbu" | "namaWali" | "alamatWali" | "noHpWali" | "pekerjaanWali", ExtArgs["result"]["siswa"]>
+  export type SiswaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "nisn" | "nis" | "nama" | "createdAt" | "updatedAt" | "tempatLahir" | "tanggalLahir" | "agama" | "jenisKelamin" | "nik" | "statusDalamKeluarga" | "anakKe" | "alamatSiswa" | "noTeleponRumah" | "sekolahAsal" | "diterimaKelas" | "diterimaTanggal" | "namaAyah" | "namaIbu" | "alamatOrtu" | "noHpOrtu" | "pekerjaanAyah" | "pekerjaanIbu" | "namaWali" | "alamatWali" | "noHpWali" | "pekerjaanWali", ExtArgs["result"]["siswa"]>
   export type SiswaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     riwayatKelas?: boolean | Siswa$riwayatKelasArgs<ExtArgs>
@@ -5490,6 +5511,7 @@ export namespace Prisma {
       tempatLahir: string | null
       tanggalLahir: Date | null
       agama: $Enums.Agama | null
+      jenisKelamin: $Enums.JenisKelamin | null
       nik: string | null
       statusDalamKeluarga: $Enums.StatusDalamKeluarga | null
       anakKe: number | null
@@ -5893,6 +5915,7 @@ export namespace Prisma {
     readonly tempatLahir: FieldRef<"Siswa", 'String'>
     readonly tanggalLahir: FieldRef<"Siswa", 'DateTime'>
     readonly agama: FieldRef<"Siswa", 'Agama'>
+    readonly jenisKelamin: FieldRef<"Siswa", 'JenisKelamin'>
     readonly nik: FieldRef<"Siswa", 'String'>
     readonly statusDalamKeluarga: FieldRef<"Siswa", 'StatusDalamKeluarga'>
     readonly anakKe: FieldRef<"Siswa", 'Int'>
@@ -21804,6 +21827,7 @@ export namespace Prisma {
     tempatLahir: 'tempatLahir',
     tanggalLahir: 'tanggalLahir',
     agama: 'agama',
+    jenisKelamin: 'jenisKelamin',
     nik: 'nik',
     statusDalamKeluarga: 'statusDalamKeluarga',
     anakKe: 'anakKe',
@@ -22189,6 +22213,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'JenisKelamin'
+   */
+  export type EnumJenisKelaminFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JenisKelamin'>
+    
+
+
+  /**
    * Reference to a field of type 'StatusDalamKeluarga'
    */
   export type EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusDalamKeluarga'>
@@ -22231,7 +22262,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
-    email?: StringFilter<"User"> | string
+    email?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     fotoProfil?: StringNullableFilter<"User"> | string | null
@@ -22250,7 +22281,7 @@ export namespace Prisma {
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
     fotoProfil?: SortOrderInput | SortOrder
@@ -22292,7 +22323,7 @@ export namespace Prisma {
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    email?: SortOrder
+    email?: SortOrderInput | SortOrder
     password?: SortOrder
     role?: SortOrder
     fotoProfil?: SortOrderInput | SortOrder
@@ -22316,7 +22347,7 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
-    email?: StringWithAggregatesFilter<"User"> | string
+    email?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
     fotoProfil?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -22418,6 +22449,7 @@ export namespace Prisma {
     tempatLahir?: StringNullableFilter<"Siswa"> | string | null
     tanggalLahir?: DateTimeNullableFilter<"Siswa"> | Date | string | null
     agama?: EnumAgamaNullableFilter<"Siswa"> | $Enums.Agama | null
+    jenisKelamin?: EnumJenisKelaminNullableFilter<"Siswa"> | $Enums.JenisKelamin | null
     nik?: StringNullableFilter<"Siswa"> | string | null
     statusDalamKeluarga?: EnumStatusDalamKeluargaNullableFilter<"Siswa"> | $Enums.StatusDalamKeluarga | null
     anakKe?: IntNullableFilter<"Siswa"> | number | null
@@ -22455,6 +22487,7 @@ export namespace Prisma {
     tempatLahir?: SortOrderInput | SortOrder
     tanggalLahir?: SortOrderInput | SortOrder
     agama?: SortOrderInput | SortOrder
+    jenisKelamin?: SortOrderInput | SortOrder
     nik?: SortOrderInput | SortOrder
     statusDalamKeluarga?: SortOrderInput | SortOrder
     anakKe?: SortOrderInput | SortOrder
@@ -22497,6 +22530,7 @@ export namespace Prisma {
     tempatLahir?: StringNullableFilter<"Siswa"> | string | null
     tanggalLahir?: DateTimeNullableFilter<"Siswa"> | Date | string | null
     agama?: EnumAgamaNullableFilter<"Siswa"> | $Enums.Agama | null
+    jenisKelamin?: EnumJenisKelaminNullableFilter<"Siswa"> | $Enums.JenisKelamin | null
     statusDalamKeluarga?: EnumStatusDalamKeluargaNullableFilter<"Siswa"> | $Enums.StatusDalamKeluarga | null
     anakKe?: IntNullableFilter<"Siswa"> | number | null
     alamatSiswa?: StringNullableFilter<"Siswa"> | string | null
@@ -22533,6 +22567,7 @@ export namespace Prisma {
     tempatLahir?: SortOrderInput | SortOrder
     tanggalLahir?: SortOrderInput | SortOrder
     agama?: SortOrderInput | SortOrder
+    jenisKelamin?: SortOrderInput | SortOrder
     nik?: SortOrderInput | SortOrder
     statusDalamKeluarga?: SortOrderInput | SortOrder
     anakKe?: SortOrderInput | SortOrder
@@ -22572,6 +22607,7 @@ export namespace Prisma {
     tempatLahir?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
     tanggalLahir?: DateTimeNullableWithAggregatesFilter<"Siswa"> | Date | string | null
     agama?: EnumAgamaNullableWithAggregatesFilter<"Siswa"> | $Enums.Agama | null
+    jenisKelamin?: EnumJenisKelaminNullableWithAggregatesFilter<"Siswa"> | $Enums.JenisKelamin | null
     nik?: StringNullableWithAggregatesFilter<"Siswa"> | string | null
     statusDalamKeluarga?: EnumStatusDalamKeluargaNullableWithAggregatesFilter<"Siswa"> | $Enums.StatusDalamKeluarga | null
     anakKe?: IntNullableWithAggregatesFilter<"Siswa"> | number | null
@@ -23629,7 +23665,7 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -23648,7 +23684,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateInput = {
     id?: number
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -23666,7 +23702,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateInput = {
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23685,7 +23721,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23704,7 +23740,7 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: number
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -23719,7 +23755,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateManyMutationInput = {
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23735,7 +23771,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23832,6 +23868,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -23869,6 +23906,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -23903,6 +23941,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -23940,6 +23979,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -23976,6 +24016,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -24005,6 +24046,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -24036,6 +24078,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -25021,6 +25064,21 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -25041,21 +25099,6 @@ export namespace Prisma {
     in?: $Enums.Role[]
     notIn?: $Enums.Role[]
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -25191,6 +25234,24 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -25217,24 +25278,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -25356,6 +25399,13 @@ export namespace Prisma {
     not?: NestedEnumAgamaNullableFilter<$PrismaModel> | $Enums.Agama | null
   }
 
+  export type EnumJenisKelaminNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.JenisKelamin | EnumJenisKelaminFieldRefInput<$PrismaModel> | null
+    in?: $Enums.JenisKelamin[] | null
+    notIn?: $Enums.JenisKelamin[] | null
+    not?: NestedEnumJenisKelaminNullableFilter<$PrismaModel> | $Enums.JenisKelamin | null
+  }
+
   export type EnumStatusDalamKeluargaNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusDalamKeluarga | EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> | null
     in?: $Enums.StatusDalamKeluarga[] | null
@@ -25430,6 +25480,7 @@ export namespace Prisma {
     tempatLahir?: SortOrder
     tanggalLahir?: SortOrder
     agama?: SortOrder
+    jenisKelamin?: SortOrder
     nik?: SortOrder
     statusDalamKeluarga?: SortOrder
     anakKe?: SortOrder
@@ -25467,6 +25518,7 @@ export namespace Prisma {
     tempatLahir?: SortOrder
     tanggalLahir?: SortOrder
     agama?: SortOrder
+    jenisKelamin?: SortOrder
     nik?: SortOrder
     statusDalamKeluarga?: SortOrder
     anakKe?: SortOrder
@@ -25498,6 +25550,7 @@ export namespace Prisma {
     tempatLahir?: SortOrder
     tanggalLahir?: SortOrder
     agama?: SortOrder
+    jenisKelamin?: SortOrder
     nik?: SortOrder
     statusDalamKeluarga?: SortOrder
     anakKe?: SortOrder
@@ -25546,6 +25599,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumAgamaNullableFilter<$PrismaModel>
     _max?: NestedEnumAgamaNullableFilter<$PrismaModel>
+  }
+
+  export type EnumJenisKelaminNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.JenisKelamin | EnumJenisKelaminFieldRefInput<$PrismaModel> | null
+    in?: $Enums.JenisKelamin[] | null
+    notIn?: $Enums.JenisKelamin[] | null
+    not?: NestedEnumJenisKelaminNullableWithAggregatesFilter<$PrismaModel> | $Enums.JenisKelamin | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumJenisKelaminNullableFilter<$PrismaModel>
+    _max?: NestedEnumJenisKelaminNullableFilter<$PrismaModel>
   }
 
   export type EnumStatusDalamKeluargaNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -26462,16 +26525,16 @@ export namespace Prisma {
     connect?: TandaTanganWhereUniqueInput | TandaTanganWhereUniqueInput[]
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
     set?: $Enums.Role
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -26742,6 +26805,10 @@ export namespace Prisma {
 
   export type NullableEnumAgamaFieldUpdateOperationsInput = {
     set?: $Enums.Agama | null
+  }
+
+  export type NullableEnumJenisKelaminFieldUpdateOperationsInput = {
+    set?: $Enums.JenisKelamin | null
   }
 
   export type NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput = {
@@ -27937,6 +28004,21 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -27957,21 +28039,6 @@ export namespace Prisma {
     in?: $Enums.Role[]
     notIn?: $Enums.Role[]
     not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
@@ -28023,6 +28090,24 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -28049,24 +28134,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRoleFilter<$PrismaModel>
     _max?: NestedEnumRoleFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -28128,6 +28195,13 @@ export namespace Prisma {
     not?: NestedEnumAgamaNullableFilter<$PrismaModel> | $Enums.Agama | null
   }
 
+  export type NestedEnumJenisKelaminNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.JenisKelamin | EnumJenisKelaminFieldRefInput<$PrismaModel> | null
+    in?: $Enums.JenisKelamin[] | null
+    notIn?: $Enums.JenisKelamin[] | null
+    not?: NestedEnumJenisKelaminNullableFilter<$PrismaModel> | $Enums.JenisKelamin | null
+  }
+
   export type NestedEnumStatusDalamKeluargaNullableFilter<$PrismaModel = never> = {
     equals?: $Enums.StatusDalamKeluarga | EnumStatusDalamKeluargaFieldRefInput<$PrismaModel> | null
     in?: $Enums.StatusDalamKeluarga[] | null
@@ -28157,6 +28231,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumAgamaNullableFilter<$PrismaModel>
     _max?: NestedEnumAgamaNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumJenisKelaminNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.JenisKelamin | EnumJenisKelaminFieldRefInput<$PrismaModel> | null
+    in?: $Enums.JenisKelamin[] | null
+    notIn?: $Enums.JenisKelamin[] | null
+    not?: NestedEnumJenisKelaminNullableWithAggregatesFilter<$PrismaModel> | $Enums.JenisKelamin | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumJenisKelaminNullableFilter<$PrismaModel>
+    _max?: NestedEnumJenisKelaminNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumStatusDalamKeluargaNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -28267,6 +28351,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -28302,6 +28387,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -28409,6 +28495,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28444,6 +28531,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -28498,7 +28586,7 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutGuruInput = {
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -28516,7 +28604,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutGuruInput = {
     id?: number
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -28607,7 +28695,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutGuruInput = {
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28625,7 +28713,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutGuruInput = {
     id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28698,7 +28786,7 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutSiswaInput = {
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -28716,7 +28804,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutSiswaInput = {
     id?: number
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -28888,7 +28976,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutSiswaInput = {
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28906,7 +28994,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutSiswaInput = {
     id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30001,6 +30089,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -30037,6 +30126,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -30144,6 +30234,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30180,6 +30271,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30390,6 +30482,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -30426,6 +30519,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -30524,6 +30618,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30560,6 +30655,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30747,6 +30843,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -30783,6 +30880,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -30884,6 +30982,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -30920,6 +31019,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31017,6 +31117,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -31053,6 +31154,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -31154,6 +31256,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31190,6 +31293,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31287,6 +31391,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -31323,6 +31428,7 @@ export namespace Prisma {
     tempatLahir?: string | null
     tanggalLahir?: Date | string | null
     agama?: $Enums.Agama | null
+    jenisKelamin?: $Enums.JenisKelamin | null
     nik?: string | null
     statusDalamKeluarga?: $Enums.StatusDalamKeluarga | null
     anakKe?: number | null
@@ -31406,6 +31512,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31442,6 +31549,7 @@ export namespace Prisma {
     tempatLahir?: NullableStringFieldUpdateOperationsInput | string | null
     tanggalLahir?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     agama?: NullableEnumAgamaFieldUpdateOperationsInput | $Enums.Agama | null
+    jenisKelamin?: NullableEnumJenisKelaminFieldUpdateOperationsInput | $Enums.JenisKelamin | null
     nik?: NullableStringFieldUpdateOperationsInput | string | null
     statusDalamKeluarga?: NullableEnumStatusDalamKeluargaFieldUpdateOperationsInput | $Enums.StatusDalamKeluarga | null
     anakKe?: NullableIntFieldUpdateOperationsInput | number | null
@@ -31507,7 +31615,7 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutTandaTangansInput = {
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -31525,7 +31633,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutTandaTangansInput = {
     id?: number
-    email: string
+    email?: string | null
     password: string
     role: $Enums.Role
     fotoProfil?: string | null
@@ -31592,7 +31700,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutTandaTangansInput = {
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31610,7 +31718,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutTandaTangansInput = {
     id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     fotoProfil?: NullableStringFieldUpdateOperationsInput | string | null
