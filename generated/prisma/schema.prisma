@@ -52,6 +52,13 @@ enum JenisKelamin {
   PEREMPUAN
 }
 
+enum Rombel {
+  A
+  B
+  C
+  D
+}
+
 // =========================================
 // AUTENTIKASI & PENGGUNA
 // =========================================
@@ -186,7 +193,9 @@ model Kelas {
   id            Int      @id @default(autoincrement())
   tahunAjaranId Int      @map("tahun_ajaran_id")
   waliKelasId   Int?     @map("wali_kelas_id")
-  nama          String // contoh: "VII-A"
+  tingkat       Int // 7, 8, atau 9
+  rombel        Rombel // A, B, C, atau D
+  nama          String // otomatis dari tingkat + rombel, contoh: "VII-A"
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
@@ -196,6 +205,7 @@ model Kelas {
   riwayatKelas RiwayatKelas[]
 
   @@unique([tahunAjaranId, nama])
+  @@unique([tahunAjaranId, tingkat, rombel])
   @@map("kelas")
 }
 

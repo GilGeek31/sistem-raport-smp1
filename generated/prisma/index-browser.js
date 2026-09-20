@@ -200,6 +200,8 @@ exports.Prisma.KelasScalarFieldEnum = {
   id: 'id',
   tahunAjaranId: 'tahunAjaranId',
   waliKelasId: 'waliKelasId',
+  tingkat: 'tingkat',
+  rombel: 'rombel',
   nama: 'nama',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -439,6 +441,13 @@ exports.KategoriMapel = exports.$Enums.KategoriMapel = {
   UMUM: 'UMUM',
   MULOK: 'MULOK',
   PEMINATAN: 'PEMINATAN'
+};
+
+exports.Rombel = exports.$Enums.Rombel = {
+  A: 'A',
+  B: 'B',
+  C: 'C',
+  D: 'D'
 };
 
 exports.StatusTP = exports.$Enums.StatusTP = {

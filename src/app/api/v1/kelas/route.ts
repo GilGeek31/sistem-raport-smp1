@@ -3,11 +3,15 @@ import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { apiSuccess, apiError } from '@/lib/api-response';
+import { buatNamaKelas, TINGKAT_VALID, ROMBEL_VALID } from '@/lib/kelas-helper';
 
 const createKelasSchema = z.object({
   tahunAjaranId: z.number().int(),
   waliKelasId: z.number().int().optional(),
-  nama: z.string().min(1, 'Nama kelas wajib diisi (contoh: VII-A)'),
+  tingkat: z.number().int().refine((v) => (TINGKAT_VALID as readonly number[]).includes(v), {
+    message: 'Tingkat harus 7, 8, atau 9',
+  }),
+  rombel: z.enum(ROMBEL_VALID, { message: 'Rombel harus A, B, C, atau D' }),
 });
 
 // GET /api/v1/kelas?tahun_ajaran_id=...
@@ -23,7 +27,7 @@ export async function GET(req: NextRequest) {
       waliKelas: { select: { id: true, nama: true } },
       tahunAjaran: { select: { tahun: true, semester: true } },
     },
-    orderBy: { nama: 'asc' },
+    orderBy: [{ tingkat: 'asc' }, { rombel: 'asc' }],
   });
 
   return apiSuccess(kelas, 'Daftar kelas berhasil diambil');
@@ -41,7 +45,8 @@ export async function POST(req: NextRequest) {
   const parsed = createKelasSchema.safeParse(body);
   if (!parsed.success) return apiError(parsed.error.issues[0].message, 422);
 
-  const { tahunAjaranId, waliKelasId, nama } = parsed.data;
+  const { tahunAjaranId, waliKelasId, tingkat, rombel } = parsed.data;
+  const nama = buatNamaKelas(tingkat, rombel);
 
   const tahunAjaran = await prisma.tahunAjaran.findUnique({
     where: { id: tahunAjaranId },
@@ -54,14 +59,14 @@ export async function POST(req: NextRequest) {
   }
 
   const existing = await prisma.kelas.findUnique({
-    where: { tahunAjaranId_nama: { tahunAjaranId, nama } },
+    where: { tahunAjaranId_tingkat_rombel: { tahunAjaranId, tingkat, rombel } },
   });
   if (existing) {
     return apiError(`Kelas "${nama}" sudah ada di tahun ajaran ini`, 409);
   }
 
   const kelas = await prisma.kelas.create({
-    data: { tahunAjaranId, waliKelasId, nama },
+    data: { tahunAjaranId, waliKelasId, tingkat, rombel, nama },
   });
 
   return apiSuccess(kelas, 'Kelas berhasil ditambahkan', 201);

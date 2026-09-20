@@ -166,6 +166,16 @@ export const JenisKelamin: {
 
 export type JenisKelamin = (typeof JenisKelamin)[keyof typeof JenisKelamin]
 
+
+export const Rombel: {
+  A: 'A',
+  B: 'B',
+  C: 'C',
+  D: 'D'
+};
+
+export type Rombel = (typeof Rombel)[keyof typeof Rombel]
+
 }
 
 export type Role = $Enums.Role
@@ -191,6 +201,10 @@ export const StatusDalamKeluarga: typeof $Enums.StatusDalamKeluarga
 export type JenisKelamin = $Enums.JenisKelamin
 
 export const JenisKelamin: typeof $Enums.JenisKelamin
+
+export type Rombel = $Enums.Rombel
+
+export const Rombel: typeof $Enums.Rombel
 
 /**
  * ##  Prisma Client ʲˢ
@@ -8618,18 +8632,22 @@ export namespace Prisma {
     id: number | null
     tahunAjaranId: number | null
     waliKelasId: number | null
+    tingkat: number | null
   }
 
   export type KelasSumAggregateOutputType = {
     id: number | null
     tahunAjaranId: number | null
     waliKelasId: number | null
+    tingkat: number | null
   }
 
   export type KelasMinAggregateOutputType = {
     id: number | null
     tahunAjaranId: number | null
     waliKelasId: number | null
+    tingkat: number | null
+    rombel: $Enums.Rombel | null
     nama: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8639,6 +8657,8 @@ export namespace Prisma {
     id: number | null
     tahunAjaranId: number | null
     waliKelasId: number | null
+    tingkat: number | null
+    rombel: $Enums.Rombel | null
     nama: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8648,6 +8668,8 @@ export namespace Prisma {
     id: number
     tahunAjaranId: number
     waliKelasId: number
+    tingkat: number
+    rombel: number
     nama: number
     createdAt: number
     updatedAt: number
@@ -8659,18 +8681,22 @@ export namespace Prisma {
     id?: true
     tahunAjaranId?: true
     waliKelasId?: true
+    tingkat?: true
   }
 
   export type KelasSumAggregateInputType = {
     id?: true
     tahunAjaranId?: true
     waliKelasId?: true
+    tingkat?: true
   }
 
   export type KelasMinAggregateInputType = {
     id?: true
     tahunAjaranId?: true
     waliKelasId?: true
+    tingkat?: true
+    rombel?: true
     nama?: true
     createdAt?: true
     updatedAt?: true
@@ -8680,6 +8706,8 @@ export namespace Prisma {
     id?: true
     tahunAjaranId?: true
     waliKelasId?: true
+    tingkat?: true
+    rombel?: true
     nama?: true
     createdAt?: true
     updatedAt?: true
@@ -8689,6 +8717,8 @@ export namespace Prisma {
     id?: true
     tahunAjaranId?: true
     waliKelasId?: true
+    tingkat?: true
+    rombel?: true
     nama?: true
     createdAt?: true
     updatedAt?: true
@@ -8785,6 +8815,8 @@ export namespace Prisma {
     id: number
     tahunAjaranId: number
     waliKelasId: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt: Date
     updatedAt: Date
@@ -8813,6 +8845,8 @@ export namespace Prisma {
     id?: boolean
     tahunAjaranId?: boolean
     waliKelasId?: boolean
+    tingkat?: boolean
+    rombel?: boolean
     nama?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8829,12 +8863,14 @@ export namespace Prisma {
     id?: boolean
     tahunAjaranId?: boolean
     waliKelasId?: boolean
+    tingkat?: boolean
+    rombel?: boolean
     nama?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type KelasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tahunAjaranId" | "waliKelasId" | "nama" | "createdAt" | "updatedAt", ExtArgs["result"]["kelas"]>
+  export type KelasOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tahunAjaranId" | "waliKelasId" | "tingkat" | "rombel" | "nama" | "createdAt" | "updatedAt", ExtArgs["result"]["kelas"]>
   export type KelasInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tahunAjaran?: boolean | TahunAjaranDefaultArgs<ExtArgs>
     waliKelas?: boolean | Kelas$waliKelasArgs<ExtArgs>
@@ -8855,6 +8891,8 @@ export namespace Prisma {
       id: number
       tahunAjaranId: number
       waliKelasId: number | null
+      tingkat: number
+      rombel: $Enums.Rombel
       nama: string
       createdAt: Date
       updatedAt: Date
@@ -9234,6 +9272,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Kelas", 'Int'>
     readonly tahunAjaranId: FieldRef<"Kelas", 'Int'>
     readonly waliKelasId: FieldRef<"Kelas", 'Int'>
+    readonly tingkat: FieldRef<"Kelas", 'Int'>
+    readonly rombel: FieldRef<"Kelas", 'Rombel'>
     readonly nama: FieldRef<"Kelas", 'String'>
     readonly createdAt: FieldRef<"Kelas", 'DateTime'>
     readonly updatedAt: FieldRef<"Kelas", 'DateTime'>
@@ -21879,6 +21919,8 @@ export namespace Prisma {
     id: 'id',
     tahunAjaranId: 'tahunAjaranId',
     waliKelasId: 'waliKelasId',
+    tingkat: 'tingkat',
+    rombel: 'rombel',
     nama: 'nama',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -22237,6 +22279,13 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Rombel'
+   */
+  export type EnumRombelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Rombel'>
     
 
 
@@ -22780,6 +22829,8 @@ export namespace Prisma {
     id?: IntFilter<"Kelas"> | number
     tahunAjaranId?: IntFilter<"Kelas"> | number
     waliKelasId?: IntNullableFilter<"Kelas"> | number | null
+    tingkat?: IntFilter<"Kelas"> | number
+    rombel?: EnumRombelFilter<"Kelas"> | $Enums.Rombel
     nama?: StringFilter<"Kelas"> | string
     createdAt?: DateTimeFilter<"Kelas"> | Date | string
     updatedAt?: DateTimeFilter<"Kelas"> | Date | string
@@ -22793,6 +22844,8 @@ export namespace Prisma {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrderInput | SortOrder
+    tingkat?: SortOrder
+    rombel?: SortOrder
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22806,11 +22859,14 @@ export namespace Prisma {
   export type KelasWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     tahunAjaranId_nama?: KelasTahunAjaranIdNamaCompoundUniqueInput
+    tahunAjaranId_tingkat_rombel?: KelasTahunAjaranIdTingkatRombelCompoundUniqueInput
     AND?: KelasWhereInput | KelasWhereInput[]
     OR?: KelasWhereInput[]
     NOT?: KelasWhereInput | KelasWhereInput[]
     tahunAjaranId?: IntFilter<"Kelas"> | number
     waliKelasId?: IntNullableFilter<"Kelas"> | number | null
+    tingkat?: IntFilter<"Kelas"> | number
+    rombel?: EnumRombelFilter<"Kelas"> | $Enums.Rombel
     nama?: StringFilter<"Kelas"> | string
     createdAt?: DateTimeFilter<"Kelas"> | Date | string
     updatedAt?: DateTimeFilter<"Kelas"> | Date | string
@@ -22818,12 +22874,14 @@ export namespace Prisma {
     waliKelas?: XOR<GuruNullableScalarRelationFilter, GuruWhereInput> | null
     guruMapels?: GuruMapelListRelationFilter
     riwayatKelas?: RiwayatKelasListRelationFilter
-  }, "id" | "tahunAjaranId_nama">
+  }, "id" | "tahunAjaranId_nama" | "tahunAjaranId_tingkat_rombel">
 
   export type KelasOrderByWithAggregationInput = {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrderInput | SortOrder
+    tingkat?: SortOrder
+    rombel?: SortOrder
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22841,6 +22899,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Kelas"> | number
     tahunAjaranId?: IntWithAggregatesFilter<"Kelas"> | number
     waliKelasId?: IntNullableWithAggregatesFilter<"Kelas"> | number | null
+    tingkat?: IntWithAggregatesFilter<"Kelas"> | number
+    rombel?: EnumRombelWithAggregatesFilter<"Kelas"> | $Enums.Rombel
     nama?: StringWithAggregatesFilter<"Kelas"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Kelas"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Kelas"> | Date | string
@@ -24252,6 +24312,8 @@ export namespace Prisma {
   }
 
   export type KelasCreateInput = {
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24265,6 +24327,8 @@ export namespace Prisma {
     id?: number
     tahunAjaranId: number
     waliKelasId?: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24273,6 +24337,8 @@ export namespace Prisma {
   }
 
   export type KelasUpdateInput = {
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24286,6 +24352,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     tahunAjaranId?: IntFieldUpdateOperationsInput | number
     waliKelasId?: NullableIntFieldUpdateOperationsInput | number | null
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24297,12 +24365,16 @@ export namespace Prisma {
     id?: number
     tahunAjaranId: number
     waliKelasId?: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type KelasUpdateManyMutationInput = {
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24312,6 +24384,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     tahunAjaranId?: IntFieldUpdateOperationsInput | number
     waliKelasId?: NullableIntFieldUpdateOperationsInput | number | null
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25750,6 +25824,13 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnumRombelFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rombel | EnumRombelFieldRefInput<$PrismaModel>
+    in?: $Enums.Rombel[]
+    notIn?: $Enums.Rombel[]
+    not?: NestedEnumRombelFilter<$PrismaModel> | $Enums.Rombel
+  }
+
   export type TahunAjaranScalarRelationFilter = {
     is?: TahunAjaranWhereInput
     isNot?: TahunAjaranWhereInput
@@ -25766,10 +25847,18 @@ export namespace Prisma {
     nama: string
   }
 
+  export type KelasTahunAjaranIdTingkatRombelCompoundUniqueInput = {
+    tahunAjaranId: number
+    tingkat: number
+    rombel: $Enums.Rombel
+  }
+
   export type KelasCountOrderByAggregateInput = {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrder
+    tingkat?: SortOrder
+    rombel?: SortOrder
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -25779,12 +25868,15 @@ export namespace Prisma {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrder
+    tingkat?: SortOrder
   }
 
   export type KelasMaxOrderByAggregateInput = {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrder
+    tingkat?: SortOrder
+    rombel?: SortOrder
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -25794,6 +25886,8 @@ export namespace Prisma {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrder
+    tingkat?: SortOrder
+    rombel?: SortOrder
     nama?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -25803,6 +25897,17 @@ export namespace Prisma {
     id?: SortOrder
     tahunAjaranId?: SortOrder
     waliKelasId?: SortOrder
+    tingkat?: SortOrder
+  }
+
+  export type EnumRombelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rombel | EnumRombelFieldRefInput<$PrismaModel>
+    in?: $Enums.Rombel[]
+    notIn?: $Enums.Rombel[]
+    not?: NestedEnumRombelWithAggregatesFilter<$PrismaModel> | $Enums.Rombel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRombelFilter<$PrismaModel>
+    _max?: NestedEnumRombelFilter<$PrismaModel>
   }
 
   export type EkskulOrderByRelevanceInput = {
@@ -27347,6 +27452,10 @@ export namespace Prisma {
     connect?: RiwayatKelasWhereUniqueInput | RiwayatKelasWhereUniqueInput[]
   }
 
+  export type EnumRombelFieldUpdateOperationsInput = {
+    set?: $Enums.Rombel
+  }
+
   export type TahunAjaranUpdateOneRequiredWithoutKelasNestedInput = {
     create?: XOR<TahunAjaranCreateWithoutKelasInput, TahunAjaranUncheckedCreateWithoutKelasInput>
     connectOrCreate?: TahunAjaranCreateOrConnectWithoutKelasInput
@@ -28283,6 +28392,23 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedEnumRombelFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rombel | EnumRombelFieldRefInput<$PrismaModel>
+    in?: $Enums.Rombel[]
+    notIn?: $Enums.Rombel[]
+    not?: NestedEnumRombelFilter<$PrismaModel> | $Enums.Rombel
+  }
+
+  export type NestedEnumRombelWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Rombel | EnumRombelFieldRefInput<$PrismaModel>
+    in?: $Enums.Rombel[]
+    notIn?: $Enums.Rombel[]
+    not?: NestedEnumRombelWithAggregatesFilter<$PrismaModel> | $Enums.Rombel
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRombelFilter<$PrismaModel>
+    _max?: NestedEnumRombelFilter<$PrismaModel>
+  }
+
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | null
@@ -28626,6 +28752,8 @@ export namespace Prisma {
   }
 
   export type KelasCreateWithoutWaliKelasInput = {
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28637,6 +28765,8 @@ export namespace Prisma {
   export type KelasUncheckedCreateWithoutWaliKelasInput = {
     id?: number
     tahunAjaranId: number
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28752,6 +28882,8 @@ export namespace Prisma {
     id?: IntFilter<"Kelas"> | number
     tahunAjaranId?: IntFilter<"Kelas"> | number
     waliKelasId?: IntNullableFilter<"Kelas"> | number | null
+    tingkat?: IntFilter<"Kelas"> | number
+    rombel?: EnumRombelFilter<"Kelas"> | $Enums.Rombel
     nama?: StringFilter<"Kelas"> | string
     createdAt?: DateTimeFilter<"Kelas"> | Date | string
     updatedAt?: DateTimeFilter<"Kelas"> | Date | string
@@ -29202,6 +29334,8 @@ export namespace Prisma {
   }
 
   export type KelasCreateWithoutTahunAjaranInput = {
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29213,6 +29347,8 @@ export namespace Prisma {
   export type KelasUncheckedCreateWithoutTahunAjaranInput = {
     id?: number
     waliKelasId?: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29865,6 +30001,8 @@ export namespace Prisma {
   }
 
   export type KelasCreateWithoutGuruMapelsInput = {
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -29877,6 +30015,8 @@ export namespace Prisma {
     id?: number
     tahunAjaranId: number
     waliKelasId?: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30018,6 +30158,8 @@ export namespace Prisma {
   }
 
   export type KelasUpdateWithoutGuruMapelsInput = {
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30030,6 +30172,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     tahunAjaranId?: IntFieldUpdateOperationsInput | number
     waliKelasId?: NullableIntFieldUpdateOperationsInput | number | null
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30157,6 +30301,8 @@ export namespace Prisma {
   }
 
   export type KelasCreateWithoutRiwayatKelasInput = {
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30169,6 +30315,8 @@ export namespace Prisma {
     id?: number
     tahunAjaranId: number
     waliKelasId?: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30308,6 +30456,8 @@ export namespace Prisma {
   }
 
   export type KelasUpdateWithoutRiwayatKelasInput = {
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30320,6 +30470,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     tahunAjaranId?: IntFieldUpdateOperationsInput | number
     waliKelasId?: NullableIntFieldUpdateOperationsInput | number | null
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31882,6 +32034,8 @@ export namespace Prisma {
   export type KelasCreateManyWaliKelasInput = {
     id?: number
     tahunAjaranId: number
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31896,6 +32050,8 @@ export namespace Prisma {
   }
 
   export type KelasUpdateWithoutWaliKelasInput = {
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31907,6 +32063,8 @@ export namespace Prisma {
   export type KelasUncheckedUpdateWithoutWaliKelasInput = {
     id?: IntFieldUpdateOperationsInput | number
     tahunAjaranId?: IntFieldUpdateOperationsInput | number
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31917,6 +32075,8 @@ export namespace Prisma {
   export type KelasUncheckedUpdateManyWithoutWaliKelasInput = {
     id?: IntFieldUpdateOperationsInput | number
     tahunAjaranId?: IntFieldUpdateOperationsInput | number
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32168,6 +32328,8 @@ export namespace Prisma {
   export type KelasCreateManyTahunAjaranInput = {
     id?: number
     waliKelasId?: number | null
+    tingkat: number
+    rombel: $Enums.Rombel
     nama: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -32226,6 +32388,8 @@ export namespace Prisma {
   }
 
   export type KelasUpdateWithoutTahunAjaranInput = {
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32237,6 +32401,8 @@ export namespace Prisma {
   export type KelasUncheckedUpdateWithoutTahunAjaranInput = {
     id?: IntFieldUpdateOperationsInput | number
     waliKelasId?: NullableIntFieldUpdateOperationsInput | number | null
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32247,6 +32413,8 @@ export namespace Prisma {
   export type KelasUncheckedUpdateManyWithoutTahunAjaranInput = {
     id?: IntFieldUpdateOperationsInput | number
     waliKelasId?: NullableIntFieldUpdateOperationsInput | number | null
+    tingkat?: IntFieldUpdateOperationsInput | number
+    rombel?: EnumRombelFieldUpdateOperationsInput | $Enums.Rombel
     nama?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
