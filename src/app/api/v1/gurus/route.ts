@@ -26,7 +26,7 @@ export async function GET() {
   }
 
   const gurus = await prisma.guru.findMany({
-    include: { user: { select: { email: true, fotoProfil: true } } },
+    include: { user: { select: { email: true, fotoProfil: true, role: true } } },
     orderBy: { nama: 'asc' },
   });
 

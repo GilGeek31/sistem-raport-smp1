@@ -37,6 +37,14 @@ const MENU_PER_ROLE: Record<string, MenuItem[]> = {
       ],
     },
     { href: '/siswa', label: 'Data siswa', icon: '☰' },
+    {
+      label: 'Input guru',
+      icon: '➕',
+      children: [
+        { href: '/input-guru', label: 'Input satu-satu' },
+        { href: '/input-guru/import', label: 'Import' },
+      ],
+    },
     { href: '/guru', label: 'Data guru', icon: '☰' },
     { href: '/master-data', label: 'Master data', icon: '⚙' },
     { href: '/guru-mapel', label: 'Penugasan mengajar', icon: '⇄' },

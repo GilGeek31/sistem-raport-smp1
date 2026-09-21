@@ -6,6 +6,7 @@
 4. npm install -D @types/bcryptjs
 
 ==================================================================
+npx auth secret --- generate auth secret baru
 
 # Progres Proyek — Sistem Pengelolaan Nilai Raport SMP
 
