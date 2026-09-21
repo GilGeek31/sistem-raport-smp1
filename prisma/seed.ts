@@ -1,13 +1,19 @@
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import { PrismaClient, Role, KategoriMapel } from '../generated/prisma';
+import { PrismaClient, Role, KategoriMapel, JenisKelamin, Rombel } from '../generated/prisma';
 import bcrypt from 'bcryptjs';
 
 const adapter = new PrismaMariaDb(process.env.DATABASE_URL!);
 const prisma = new PrismaClient({ adapter });
 
+// tingkat (7/8/9) + rombel (A/B/C/D) -> "VII-A", dst. Samakan dengan
+// src/lib/kelas-helper.ts supaya format nama kelas konsisten di seluruh app.
+function buatNamaKelas(tingkat: number, rombel: Rombel): string {
+  const romawi: Record<number, string> = { 7: 'VII', 8: 'VIII', 9: 'IX' };
+  return `${romawi[tingkat]}-${rombel}`;
+}
 
 async function main() {
-  const password = await bcrypt.hash('`password123`', 10);
+  const password = await bcrypt.hash('password123', 10);
 
   // ===== TAHUN AJARAN =====
   const tahunAjaran = await prisma.tahunAjaran.create({
@@ -63,8 +69,24 @@ async function main() {
   });
 
   // ===== KELAS =====
+  // Kelas utama (VII-A) yang dipakai untuk sebagian besar data dummy di bawah,
+  // plus beberapa kelas lain di tingkat berbeda sekadar supaya dropdown filter
+  // kelas & fitur kenaikan kelas nanti ada beberapa pilihan untuk dicoba.
   const kelas7a = await prisma.kelas.create({
-    data: { tahunAjaranId: tahunAjaran.id, waliKelasId: guruWali.id, nama: 'VII-A' },
+    data: {
+      tahunAjaranId: tahunAjaran.id,
+      waliKelasId: guruWali.id,
+      tingkat: 7,
+      rombel: Rombel.A,
+      nama: buatNamaKelas(7, Rombel.A),
+    },
+  });
+  await prisma.kelas.createMany({
+    data: [
+      { tahunAjaranId: tahunAjaran.id, tingkat: 7, rombel: Rombel.B, nama: buatNamaKelas(7, Rombel.B) },
+      { tahunAjaranId: tahunAjaran.id, tingkat: 8, rombel: Rombel.A, nama: buatNamaKelas(8, Rombel.A) },
+      { tahunAjaranId: tahunAjaran.id, tingkat: 9, rombel: Rombel.A, nama: buatNamaKelas(9, Rombel.A) },
+    ],
   });
 
   // ===== GURU_MAPEL (penugasan mengajar) =====
@@ -92,11 +114,11 @@ async function main() {
 
   // ===== SISWA (5 siswa di kelas VII-A) =====
   const namaSiswa = [
-    { nama: 'Ahmad Fauzi', nisn: '0051234561' },
-    { nama: 'Dewi Lestari', nisn: '0051234562' },
-    { nama: 'Rizky Ramadhan', nisn: '0051234563' },
-    { nama: 'Putri Ayu', nisn: '0051234564' },
-    { nama: 'Farhan Maulana', nisn: '0051234565' },
+    { nama: 'Ahmad Fauzi', nisn: '0051234561', jenisKelamin: JenisKelamin.LAKI_LAKI },
+    { nama: 'Dewi Lestari', nisn: '0051234562', jenisKelamin: JenisKelamin.PEREMPUAN },
+    { nama: 'Rizky Ramadhan', nisn: '0051234563', jenisKelamin: JenisKelamin.LAKI_LAKI },
+    { nama: 'Putri Ayu', nisn: '0051234564', jenisKelamin: JenisKelamin.PEREMPUAN },
+    { nama: 'Farhan Maulana', nisn: '0051234565', jenisKelamin: JenisKelamin.LAKI_LAKI },
   ];
 
   for (const [i, s] of namaSiswa.entries()) {
@@ -104,7 +126,13 @@ async function main() {
       data: { email: `siswa${i + 1}@sekolah.sch.id`, password, role: Role.SISWA },
     });
     const siswa = await prisma.siswa.create({
-      data: { userId: siswaUser.id, nisn: s.nisn, nis: `2526${String(i + 1).padStart(4, '0')}`, nama: s.nama },
+      data: {
+        userId: siswaUser.id,
+        nisn: s.nisn,
+        nis: `2526${String(i + 1).padStart(4, '0')}`,
+        nama: s.nama,
+        jenisKelamin: s.jenisKelamin,
+      },
     });
     await prisma.riwayatKelas.create({
       data: { siswaId: siswa.id, kelasId: kelas7a.id, tahunAjaranId: tahunAjaran.id },
@@ -128,6 +156,7 @@ async function main() {
   });
 
   console.log('✅ Seed selesai.');
+  console.log('Kelas dibuat: VII-A (5 siswa + wali kelas), VII-B, VIII-A, IX-A (kosong).');
   console.log('Login dummy (semua password: password123):');
   console.log('- Admin: admin@sekolah.sch.id');
   console.log('- Kepala Sekolah: kepsek@sekolah.sch.id');

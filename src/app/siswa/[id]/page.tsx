@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { AppShell } from '@/components/AppShell';
 
 const AGAMA_OPTIONS = ['ISLAM', 'KRISTEN', 'KATOLIK', 'HINDU', 'BUDDHA', 'KONGHUCU', 'LAINNYA'];
@@ -11,29 +11,29 @@ const STATUS_KELUARGA_OPTIONS = ['ANAK_KANDUNG', 'ANAK_ANGKAT', 'ANAK_TIRI'];
 type Kelas = { id: number; nama: string };
 
 const initialForm = {
-  // Akun
-  email: '', nisn: '', nis: '', nama: '', password: '',
-  // Data diri
+  nisn: '', nis: '', nama: '',
   tempatLahir: '', tanggalLahir: '', jenisKelamin: '', agama: '', nik: '',
   statusDalamKeluarga: '', anakKe: '',
-  // Alamat & kontak
   alamatSiswa: '', noTeleponRumah: '',
-  // Penempatan & riwayat penerimaan
   kelasId: '', sekolahAsal: '', diterimaKelas: '', diterimaTanggal: '',
-  // Orang tua
   namaAyah: '', namaIbu: '', alamatOrtu: '', noHpOrtu: '',
   pekerjaanAyah: '', pekerjaanIbu: '',
-  // Wali
   namaWali: '', alamatWali: '', noHpWali: '', pekerjaanWali: '',
 };
 
 type FormData = typeof initialForm;
 
-export default function InputSiswaPage() {
+export default function EditSiswaPage() {
+  const { id } = useParams<{ id: string }>();
   const router = useRouter();
-  const [form, setForm] = useState<FormData>(initialForm);
+
+  const [form, setForm] = useState<FormData | null>(null);
+  const [namaSiswa, setNamaSiswa] = useState('');
+  const [email, setEmail] = useState<string | null>(null);
   const [kelasList, setKelasList] = useState<Kelas[]>([]);
+  const [memuat, setMemuat] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [menghapus, setMenghapus] = useState(false);
   const [pesan, setPesan] = useState<{ tipe: 'sukses' | 'error'; teks: string } | null>(null);
 
   useEffect(() => {
@@ -52,17 +52,62 @@ export default function InputSiswaPage() {
     muatKelas();
   }, []);
 
+  useEffect(() => {
+    async function muat() {
+      const res = await fetch(`/api/v1/siswas/${id}`);
+      const data = await res.json();
+      if (!data.success) {
+        setPesan({ tipe: 'error', teks: data.message });
+        setMemuat(false);
+        return;
+      }
+
+      const s = data.data;
+      setNamaSiswa(s.nama);
+      setEmail(s.user?.email ?? null);
+      setForm({
+        nisn: s.nisn ?? '',
+        nis: s.nis ?? '',
+        nama: s.nama ?? '',
+        tempatLahir: s.tempatLahir ?? '',
+        tanggalLahir: s.tanggalLahir ? String(s.tanggalLahir).slice(0, 10) : '',
+        jenisKelamin: s.jenisKelamin ?? '',
+        agama: s.agama ?? '',
+        nik: s.nik ?? '',
+        statusDalamKeluarga: s.statusDalamKeluarga ?? '',
+        anakKe: s.anakKe != null ? String(s.anakKe) : '',
+        alamatSiswa: s.alamatSiswa ?? '',
+        noTeleponRumah: s.noTeleponRumah ?? '',
+        kelasId: s.riwayatKelas?.[0]?.kelas?.id != null ? String(s.riwayatKelas[0].kelas.id) : '',
+        sekolahAsal: s.sekolahAsal ?? '',
+        diterimaKelas: s.diterimaKelas ?? '',
+        diterimaTanggal: s.diterimaTanggal ? String(s.diterimaTanggal).slice(0, 10) : '',
+        namaAyah: s.namaAyah ?? '',
+        namaIbu: s.namaIbu ?? '',
+        alamatOrtu: s.alamatOrtu ?? '',
+        noHpOrtu: s.noHpOrtu ?? '',
+        pekerjaanAyah: s.pekerjaanAyah ?? '',
+        pekerjaanIbu: s.pekerjaanIbu ?? '',
+        namaWali: s.namaWali ?? '',
+        alamatWali: s.alamatWali ?? '',
+        noHpWali: s.noHpWali ?? '',
+        pekerjaanWali: s.pekerjaanWali ?? '',
+      });
+      setMemuat(false);
+    }
+    muat();
+  }, [id]);
+
   function ubah(field: keyof FormData, value: string) {
-    setForm((f) => ({ ...f, [field]: value }));
+    setForm((f) => (f ? { ...f, [field]: value } : f));
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!form) return;
     setSubmitting(true);
     setPesan(null);
 
-    // Kosongkan field yang tidak diisi (string kosong) supaya tidak
-    // dikirim sebagai "" ke server — biar dianggap "tidak diisi".
     const payload: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(form)) {
       if (value !== '') {
@@ -70,8 +115,8 @@ export default function InputSiswaPage() {
       }
     }
 
-    const res = await fetch('/api/v1/siswas', {
-      method: 'POST',
+    const res = await fetch(`/api/v1/siswas/${id}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
@@ -79,15 +124,45 @@ export default function InputSiswaPage() {
 
     setSubmitting(false);
     setPesan({ tipe: data.success ? 'sukses' : 'error', teks: data.message });
+    if (data.success) setTimeout(() => router.push('/siswa'), 800);
+  }
 
-    if (data.success) {
-      setForm(initialForm);
-      setTimeout(() => router.push('/siswa'), 1000);
+  async function handleHapus() {
+    if (!confirm(`Hapus siswa "${namaSiswa}"? Akun login siswa ini juga akan terhapus.`)) return;
+    setMenghapus(true);
+    try {
+      const res = await fetch(`/api/v1/siswas/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        router.push('/siswa');
+      } else {
+        setPesan({ tipe: 'error', teks: data.message });
+      }
+    } catch {
+      setPesan({ tipe: 'error', teks: 'Terjadi kesalahan tak terduga di server saat menghapus siswa.' });
+    } finally {
+      setMenghapus(false);
     }
   }
 
+  if (memuat) {
+    return (
+      <AppShell title="Edit siswa">
+        <p style={{ fontSize: 13, color: '#777' }}>Memuat data siswa...</p>
+      </AppShell>
+    );
+  }
+
+  if (!form) {
+    return (
+      <AppShell title="Edit siswa">
+        {pesan && <p style={{ fontSize: 13, color: '#b3261e' }}>{pesan.teks}</p>}
+      </AppShell>
+    );
+  }
+
   return (
-    <AppShell title="Input siswa baru">
+    <AppShell title={`Edit siswa — ${namaSiswa}`}>
       <form onSubmit={handleSubmit} style={{ maxWidth: 720 }}>
         {pesan && (
           <div
@@ -108,15 +183,14 @@ export default function InputSiswaPage() {
         <Section title="Akun">
           <Grid>
             <Field label="Nama lengkap *" value={form.nama} onChange={(v) => ubah('nama', v)} required />
-            <Field label="Email (opsional)" type="email" value={form.email} onChange={(v) => ubah('email', v)} />
+            <div>
+              <label style={{ fontSize: 12, color: '#555', display: 'block', marginBottom: 4 }}>Email</label>
+              <div style={{ fontSize: 13, padding: '7px 0', color: '#777' }}>
+                {email ?? 'Belum ada (login pakai NISN)'}
+              </div>
+            </div>
             <Field label="NISN *" value={form.nisn} onChange={(v) => ubah('nisn', v)} required />
             <Field label="NIS" value={form.nis} onChange={(v) => ubah('nis', v)} />
-            <Field
-              label="Password (kosongkan = pakai NISN)"
-              type="password"
-              value={form.password}
-              onChange={(v) => ubah('password', v)}
-            />
           </Grid>
         </Section>
 
@@ -124,25 +198,10 @@ export default function InputSiswaPage() {
           <Grid>
             <Field label="Tempat lahir" value={form.tempatLahir} onChange={(v) => ubah('tempatLahir', v)} />
             <Field label="Tanggal lahir" type="date" value={form.tanggalLahir} onChange={(v) => ubah('tanggalLahir', v)} />
-            <SelectField
-              label="Jenis kelamin"
-              value={form.jenisKelamin}
-              onChange={(v) => ubah('jenisKelamin', v)}
-              options={JENIS_KELAMIN_OPTIONS}
-            />
-            <SelectField
-              label="Agama"
-              value={form.agama}
-              onChange={(v) => ubah('agama', v)}
-              options={AGAMA_OPTIONS}
-            />
+            <SelectField label="Jenis kelamin" value={form.jenisKelamin} onChange={(v) => ubah('jenisKelamin', v)} options={JENIS_KELAMIN_OPTIONS} />
+            <SelectField label="Agama" value={form.agama} onChange={(v) => ubah('agama', v)} options={AGAMA_OPTIONS} />
             <Field label="NIK" value={form.nik} onChange={(v) => ubah('nik', v)} />
-            <SelectField
-              label="Status dalam keluarga"
-              value={form.statusDalamKeluarga}
-              onChange={(v) => ubah('statusDalamKeluarga', v)}
-              options={STATUS_KELUARGA_OPTIONS}
-            />
+            <SelectField label="Status dalam keluarga" value={form.statusDalamKeluarga} onChange={(v) => ubah('statusDalamKeluarga', v)} options={STATUS_KELUARGA_OPTIONS} />
             <Field label="Anak ke" type="number" value={form.anakKe} onChange={(v) => ubah('anakKe', v)} />
           </Grid>
         </Section>
@@ -164,8 +223,7 @@ export default function InputSiswaPage() {
             />
           </Grid>
           <p style={{ fontSize: 11.5, color: '#888', margin: '8px 0 0' }}>
-            Kosongkan kalau siswa belum mau ditempatkan ke kelas manapun dulu — bisa diatur belakangan
-            lewat halaman edit siswa.
+            Mengubah ini akan memindahkan siswa ke kelas baru di tahun ajaran yang sedang aktif.
           </p>
         </Section>
 
@@ -173,12 +231,7 @@ export default function InputSiswaPage() {
           <Grid>
             <Field label="Sekolah asal" value={form.sekolahAsal} onChange={(v) => ubah('sekolahAsal', v)} />
             <Field label="Diterima di kelas" value={form.diterimaKelas} onChange={(v) => ubah('diterimaKelas', v)} />
-            <Field
-              label="Tanggal diterima"
-              type="date"
-              value={form.diterimaTanggal}
-              onChange={(v) => ubah('diterimaTanggal', v)}
-            />
+            <Field label="Tanggal diterima" type="date" value={form.diterimaTanggal} onChange={(v) => ubah('diterimaTanggal', v)} />
           </Grid>
         </Section>
 
@@ -202,22 +255,39 @@ export default function InputSiswaPage() {
           </Grid>
         </Section>
 
-        <button
-          type="submit"
-          disabled={submitting}
-          style={{
-            background: '#023874',
-            color: '#ffffff',
-            border: 'none',
-            padding: '9px 20px',
-            fontSize: 13,
-            fontWeight: 500,
-            cursor: 'pointer',
-            marginTop: 8,
-          }}
-        >
-          {submitting ? 'Menyimpan...' : 'Simpan siswa'}
-        </button>
+        <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
+          <button
+            type="submit"
+            disabled={submitting}
+            style={{
+              background: '#023874',
+              color: '#ffffff',
+              border: 'none',
+              padding: '9px 20px',
+              fontSize: 13,
+              fontWeight: 500,
+              cursor: 'pointer',
+            }}
+          >
+            {submitting ? 'Menyimpan...' : 'Simpan perubahan'}
+          </button>
+          <button
+            type="button"
+            onClick={handleHapus}
+            disabled={menghapus}
+            style={{
+              background: 'transparent',
+              color: '#b3261e',
+              border: '1px solid #b3261e',
+              padding: '9px 20px',
+              fontSize: 13,
+              fontWeight: 500,
+              cursor: 'pointer',
+            }}
+          >
+            {menghapus ? 'Menghapus...' : 'Hapus siswa'}
+          </button>
+        </div>
       </form>
     </AppShell>
   );
@@ -225,15 +295,7 @@ export default function InputSiswaPage() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        background: '#ffffff',
-        border: '1px solid #dee2e6',
-        borderRadius: 4,
-        padding: '1rem 1.25rem',
-        marginBottom: '1rem',
-      }}
-    >
+    <div style={{ background: '#ffffff', border: '1px solid #dee2e6', borderRadius: 4, padding: '1rem 1.25rem', marginBottom: '1rem' }}>
       <p style={{ fontWeight: 500, margin: '0 0 12px', color: '#111', fontSize: 14 }}>{title}</p>
       {children}
     </div>
@@ -241,25 +303,13 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 function Grid({ children }: { children: React.ReactNode }) {
-  return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>{children}</div>
-  );
+  return <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>{children}</div>;
 }
 
 function Field({
-  label,
-  value,
-  onChange,
-  type = 'text',
-  required = false,
-  full = false,
+  label, value, onChange, type = 'text', required = false, full = false,
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  type?: string;
-  required?: boolean;
-  full?: boolean;
+  label: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean; full?: boolean;
 }) {
   return (
     <div style={{ gridColumn: full ? '1 / -1' : undefined }}>
@@ -269,29 +319,16 @@ function Field({
         value={value}
         required={required}
         onChange={(e) => onChange(e.target.value)}
-        style={{
-          width: '100%',
-          background: '#ffffff',
-          color: '#000000',
-          border: '1px solid #dee2e6',
-          padding: '7px 8px',
-          fontSize: 13,
-        }}
+        style={{ width: '100%', background: '#ffffff', color: '#000000', border: '1px solid #dee2e6', padding: '7px 8px', fontSize: 13 }}
       />
     </div>
   );
 }
 
 function SelectFieldObj({
-  label,
-  value,
-  onChange,
-  options,
+  label, value, onChange, options,
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: { id: number; nama: string }[];
+  label: string; value: string; onChange: (v: string) => void; options: { id: number; nama: string }[];
 }) {
   return (
     <div>
@@ -299,20 +336,11 @@ function SelectFieldObj({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{
-          width: '100%',
-          background: '#ffffff',
-          color: '#000000',
-          border: '1px solid #dee2e6',
-          padding: '7px 8px',
-          fontSize: 13,
-        }}
+        style={{ width: '100%', background: '#ffffff', color: '#000000', border: '1px solid #dee2e6', padding: '7px 8px', fontSize: 13 }}
       >
         <option value="">— Belum ditempatkan —</option>
         {options.map((opt) => (
-          <option key={opt.id} value={opt.id}>
-            {opt.nama}
-          </option>
+          <option key={opt.id} value={opt.id}>{opt.nama}</option>
         ))}
       </select>
     </div>
@@ -320,15 +348,9 @@ function SelectFieldObj({
 }
 
 function SelectField({
-  label,
-  value,
-  onChange,
-  options,
+  label, value, onChange, options,
 }: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  options: string[];
+  label: string; value: string; onChange: (v: string) => void; options: string[];
 }) {
   return (
     <div>
@@ -336,20 +358,11 @@ function SelectField({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{
-          width: '100%',
-          background: '#ffffff',
-          color: '#000000',
-          border: '1px solid #dee2e6',
-          padding: '7px 8px',
-          fontSize: 13,
-        }}
+        style={{ width: '100%', background: '#ffffff', color: '#000000', border: '1px solid #dee2e6', padding: '7px 8px', fontSize: 13 }}
       >
         <option value="">— Pilih —</option>
         {options.map((opt) => (
-          <option key={opt} value={opt}>
-            {opt.replaceAll('_', ' ')}
-          </option>
+          <option key={opt} value={opt}>{opt.replaceAll('_', ' ')}</option>
         ))}
       </select>
     </div>

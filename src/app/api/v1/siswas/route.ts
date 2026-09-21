@@ -43,6 +43,10 @@ const createSiswaSchema = z.object({
   alamatWali: z.string().optional(),
   noHpWali: z.string().optional(),
   pekerjaanWali: z.string().optional(),
+
+  // Kelas tempat siswa ini ditempatkan SEKARANG (di tahun ajaran aktif).
+  // Beda dengan `diterimaKelas` yang cuma catatan teks riwayat penerimaan.
+  kelasId: z.number().int().optional(),
 });
 
 // GET /api/v1/siswas?kelas_id=... — list siswa, bisa difilter per kelas
@@ -56,7 +60,15 @@ export async function GET(req: NextRequest) {
     where: kelasId
       ? { riwayatKelas: { some: { kelasId: Number(kelasId) } } }
       : undefined,
-    include: { user: { select: { email: true, fotoProfil: true } } },
+    include: {
+      user: { select: { email: true, fotoProfil: true } },
+      // Cukup ambil kelas di tahun ajaran yang sedang aktif, itu yang
+      // relevan ditampilkan sebagai "kelas saat ini" di daftar siswa.
+      riwayatKelas: {
+        where: { tahunAjaran: { isActive: true } },
+        include: { kelas: { select: { id: true, nama: true, tingkat: true, rombel: true } } },
+      },
+    },
     orderBy: { nama: 'asc' },
   });
 
@@ -79,7 +91,7 @@ export async function POST(req: NextRequest) {
 
   const {
     email: _emailMentah, nisn, nis, nama, password,
-    tanggalLahir, diterimaTanggal,
+    tanggalLahir, diterimaTanggal, kelasId,
     ...biodataLain
   } = parsed.data;
 
@@ -100,16 +112,27 @@ export async function POST(req: NextRequest) {
     if (nikDipakai) return apiError(`NIK "${biodataLain.nik}" sudah digunakan`, 409);
   }
 
+  let tahunAjaranAktif = null;
+  if (kelasId) {
+    const kelas = await prisma.kelas.findUnique({ where: { id: kelasId } });
+    if (!kelas) return apiError('Kelas yang dipilih tidak ditemukan', 404);
+
+    tahunAjaranAktif = await prisma.tahunAjaran.findFirst({ where: { isActive: true } });
+    if (!tahunAjaranAktif) {
+      return apiError('Belum ada tahun ajaran aktif, tidak bisa menempatkan siswa ke kelas', 422);
+    }
+  }
+
   const hashedPassword = await bcrypt.hash(password ?? nisn, 10);
 
-  // $transaction memastikan KEDUA operasi ini berhasil bersamaan,
+  // $transaction memastikan SEMUA operasi ini berhasil bersamaan,
   // atau GAGAL bersamaan (tidak ada User tanpa Siswa, atau sebaliknya).
   const siswa = await prisma.$transaction(async (tx) => {
     const user = await tx.user.create({
       data: { email, password: hashedPassword, role: 'SISWA' },
     });
 
-    return tx.siswa.create({
+    const siswaBaru = await tx.siswa.create({
       data: {
         userId: user.id,
         nisn,
@@ -120,6 +143,17 @@ export async function POST(req: NextRequest) {
         diterimaTanggal: diterimaTanggal ? new Date(diterimaTanggal) : undefined,
       },
     });
+
+    if (kelasId && tahunAjaranAktif) {
+      await tx.riwayatKelas.create({
+        data: { siswaId: siswaBaru.id, kelasId, tahunAjaranId: tahunAjaranAktif.id },
+      });
+      await tx.kehadiranSiswa.create({
+        data: { siswaId: siswaBaru.id, tahunAjaranId: tahunAjaranAktif.id },
+      });
+    }
+
+    return siswaBaru;
   });
 
   return apiSuccess(siswa, 'Siswa berhasil ditambahkan', 201);

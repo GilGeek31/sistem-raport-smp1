@@ -260,7 +260,7 @@ model RiwayatKelas {
   tahunAjaranId Int      @map("tahun_ajaran_id")
   createdAt     DateTime @default(now()) @map("created_at")
 
-  siswa       Siswa       @relation(fields: [siswaId], references: [id])
+  siswa       Siswa       @relation(fields: [siswaId], references: [id], onDelete: Cascade)
   kelas       Kelas       @relation(fields: [kelasId], references: [id])
   tahunAjaran TahunAjaran @relation(fields: [tahunAjaranId], references: [id])
 
@@ -292,7 +292,7 @@ model Nilai {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  siswa     Siswa     @relation(fields: [siswaId], references: [id])
+  siswa     Siswa     @relation(fields: [siswaId], references: [id], onDelete: Cascade)
   guruMapel GuruMapel @relation(fields: [guruMapelId], references: [id])
   nilaiTps  NilaiTp[]
 
@@ -329,7 +329,7 @@ model NilaiEkskul {
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
-  siswa       Siswa       @relation(fields: [siswaId], references: [id])
+  siswa       Siswa       @relation(fields: [siswaId], references: [id], onDelete: Cascade)
   ekskul      Ekskul      @relation(fields: [ekskulId], references: [id])
   tahunAjaran TahunAjaran @relation(fields: [tahunAjaranId], references: [id])
 
@@ -346,7 +346,7 @@ model NilaiKokurikuler {
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt @map("updated_at")
 
-  siswa       Siswa       @relation(fields: [siswaId], references: [id])
+  siswa       Siswa       @relation(fields: [siswaId], references: [id], onDelete: Cascade)
   kokurikuler Kokurikuler @relation(fields: [kokurikulerId], references: [id])
   tahunAjaran TahunAjaran @relation(fields: [tahunAjaranId], references: [id])
 
@@ -364,7 +364,7 @@ model KehadiranSiswa {
   createdAt       DateTime @default(now()) @map("created_at")
   updatedAt       DateTime @updatedAt @map("updated_at")
 
-  siswa       Siswa       @relation(fields: [siswaId], references: [id])
+  siswa       Siswa       @relation(fields: [siswaId], references: [id], onDelete: Cascade)
   tahunAjaran TahunAjaran @relation(fields: [tahunAjaranId], references: [id])
 
   @@unique([siswaId, tahunAjaranId])

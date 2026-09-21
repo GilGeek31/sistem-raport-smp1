@@ -35,7 +35,34 @@ const updateSiswaSchema = z.object({
   alamatWali: z.string().optional(),
   noHpWali: z.string().optional(),
   pekerjaanWali: z.string().optional(),
+
+  // Kelas tempat siswa ini ditempatkan SEKARANG (di tahun ajaran aktif).
+  kelasId: z.number().int().optional(),
 });
+
+// GET /api/v1/siswas/:id
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const session = await auth();
+  if (!session) return apiError('Anda harus login terlebih dahulu', 401);
+
+  const { id } = await params;
+  const siswa = await prisma.siswa.findUnique({
+    where: { id: Number(id) },
+    include: {
+      user: { select: { email: true } },
+      riwayatKelas: {
+        where: { tahunAjaran: { isActive: true } },
+        include: { kelas: { select: { id: true, nama: true } } },
+      },
+    },
+  });
+  if (!siswa) return apiError('Siswa tidak ditemukan', 404);
+
+  return apiSuccess(siswa, 'Detail siswa berhasil diambil');
+}
 
 // PUT /api/v1/siswas/:id
 export async function PUT(
@@ -56,15 +83,51 @@ export async function PUT(
   const siswa = await prisma.siswa.findUnique({ where: { id: Number(id) } });
   if (!siswa) return apiError('Siswa tidak ditemukan', 404);
 
-  const { tanggalLahir, diterimaTanggal, ...dataLain } = parsed.data;
+  const { tanggalLahir, diterimaTanggal, kelasId, ...dataLain } = parsed.data;
 
-  const updated = await prisma.siswa.update({
-    where: { id: Number(id) },
-    data: {
-      ...dataLain,
-      tanggalLahir: tanggalLahir ? new Date(tanggalLahir) : undefined,
-      diterimaTanggal: diterimaTanggal ? new Date(diterimaTanggal) : undefined,
-    },
+  if (kelasId) {
+    const kelas = await prisma.kelas.findUnique({ where: { id: kelasId } });
+    if (!kelas) return apiError('Kelas yang dipilih tidak ditemukan', 404);
+  }
+
+  const updated = await prisma.$transaction(async (tx) => {
+    const siswaTerbaru = await tx.siswa.update({
+      where: { id: Number(id) },
+      data: {
+        ...dataLain,
+        tanggalLahir: tanggalLahir ? new Date(tanggalLahir) : undefined,
+        diterimaTanggal: diterimaTanggal ? new Date(diterimaTanggal) : undefined,
+      },
+    });
+
+    if (kelasId) {
+      const tahunAjaranAktif = await tx.tahunAjaran.findFirst({ where: { isActive: true } });
+      if (!tahunAjaranAktif) {
+        throw new Error('Belum ada tahun ajaran aktif, tidak bisa memindahkan siswa ke kelas');
+      }
+
+      // Upsert: kalau siswa ini SUDAH punya riwayat kelas di tahun ajaran
+      // aktif, cukup ganti kelasnya. Kalau belum, buat baru.
+      await tx.riwayatKelas.upsert({
+        where: {
+          siswaId_tahunAjaranId: { siswaId: siswaTerbaru.id, tahunAjaranId: tahunAjaranAktif.id },
+        },
+        update: { kelasId },
+        create: { siswaId: siswaTerbaru.id, kelasId, tahunAjaranId: tahunAjaranAktif.id },
+      });
+
+      // Pastikan siswa ini juga sudah punya baris kehadiran di tahun ajaran
+      // aktif (kalau sebelumnya belum, misalnya baru pertama kali ditempatkan).
+      await tx.kehadiranSiswa.upsert({
+        where: {
+          siswaId_tahunAjaranId: { siswaId: siswaTerbaru.id, tahunAjaranId: tahunAjaranAktif.id },
+        },
+        update: {},
+        create: { siswaId: siswaTerbaru.id, tahunAjaranId: tahunAjaranAktif.id },
+      });
+    }
+
+    return siswaTerbaru;
   });
 
   return apiSuccess(updated, 'Data siswa berhasil diperbarui');
@@ -88,7 +151,20 @@ export async function DELETE(
   const siswa = await prisma.siswa.findUnique({ where: { id: Number(id) } });
   if (!siswa) return apiError('Siswa tidak ditemukan', 404);
 
-  await prisma.user.delete({ where: { id: siswa.userId } });
+  try {
+    // Hapus User-nya: karena semua relasi Siswa (kelas, nilai, kehadiran, dst)
+    // sudah diset onDelete: Cascade di schema, ini otomatis membersihkan
+    // seluruh data terkait siswa ini juga.
+    await prisma.user.delete({ where: { id: siswa.userId } });
+  } catch (err) {
+    // Jaga-jaga kalau suatu saat ada relasi baru yang belum di-cascade —
+    // selalu balas JSON yang jelas, jangan sampai request crash tanpa body.
+    console.error('Gagal menghapus siswa:', err);
+    return apiError(
+      'Gagal menghapus siswa. Kemungkinan masih ada data lain yang terkait dengan siswa ini.',
+      409
+    );
+  }
 
   return apiSuccess(null, 'Siswa berhasil dihapus');
 }
